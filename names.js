@@ -21,14 +21,19 @@ var fe1_names = [
     'Gotoh'
 ];
 var fe2_names = [
-
+    'Alm', 'Lukas', 'Gray', 'Tobin', 'Kliff', 'Silque', 'Clair', 'Clive', 'Forsyth', 'Python',
+    'Celica', 'Mae', 'Boey', 'Genny', 'Saber', 'Valbar', 'Kamui', 'Leon',
+    'Luthier', 'Mathilda', 'Delthea',
+    'Palla', 'Catria', 'Atlas', 'Jesse', 'Sonya', 'Deen', 'Est',
+    'Tatiana', 'Zeke', 'Mycen', 'Nomah'
 ]
 var fe3_names = [
     'Marth', 'Luke', 'Arran', 'Cecil', 'Roderick', 'Gordin', 'Ryan', 'Draug', 'Marisha',
     'Catria', 'Warren', 'Linde',
     'Palla', 'Julian', 'Matthis',
     'Ogma', 'Yuliya', 'Jubelo', 'Sirius', 'Castor', 'Caeda',
-    'Rickard', 'Samuel', 'Wendell',
+    'Rickard',
+    'Samuel', 'Wendell',
     'Navarre', 'Phina',
     'Cain', 'Bantu', 'Jeorge',
     'Minerva',
@@ -219,7 +224,34 @@ var fe11_names = [
     'Nagi'
 ];
 var fe12_names = [
-
+    'Marth', 'Kris', 'Luke', 'Arran', 'Cecil', 'Roderick', 'Gordin', 'Ryan', 'Draug', 'Marisha',
+    'Catria', 'Warren', 'Cord', 'Linde',
+    'Palla', 'Bord', 'Julian', 'Matthis',
+    'Wrys',
+    'Ogma', 'Yuliya', 'Jubelo', 'Sirius', 'Castor', 'Caeda',
+    'Barst', 'Rickard',
+    'Frey', 'Norne', 'Samuel', 'Wendell',
+    'Caesar', 'Radd',
+    'Navarre', 'Phina',
+    'Cain', 'Bantu', 'Roger', 'Jeorge',
+    'Minerva', 'Etzel',
+    'Merric', 'Arlen',
+    'Dice', 'Malice', 'Horace',
+    'Jake',
+    'Darros', 'Roberto', 'Belf', 'Reiden',
+    'Beck',
+    'Athena',
+    'Xane', 'Tiki',
+    'Est', 'Dolph', 'Abel',
+    'Macellan', 'Astram',
+    'Katarina',
+    'Tomas', 'Sheena', 'Samson', 'Frost',
+    'Roshea',
+    'Vyland', 'Sedgar', 'Wolf',
+    'Midia',
+    'Ymir', 'Michalis',
+    'Nagi',
+    'Lena', 'Nyna', 'Maria', 'Elice'
 ]
 var fe13_names = [
     'Robin', 'Chrom',
@@ -277,7 +309,11 @@ var fe14_names = [
     'Siegbert', 'Forrest', 'Ignatius', 'Velouria', 'Percy', 'Ophelia', 'Soleil', 'Nina'
 ]
 var fe15_names = [
-
+    'Alm', 'Lukas', 'Gray', 'Tobin', 'Kliff', 'Faye', 'Silque', 'Clair', 'Clive', 'Forsyth', 'Python',
+    'Celica', 'Mae', 'Boey', 'Genny', 'Saber', 'Valbar', 'Kamui', 'Leon',
+    'Luthier', 'Mathilda', 'Delthea',
+    'Palla', 'Catria', 'Atlas', 'Jesse', 'Sonya', 'Deen', 'Est',
+    'Tatiana', 'Zeke', 'Mycen', 'Nomah', 'Conrad'
 ]
 var fe16_names = [
     'Byleth',
