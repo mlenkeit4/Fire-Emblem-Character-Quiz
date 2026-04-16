@@ -190,28 +190,28 @@
 
         //Listener for Reset button
         document.querySelector('button[name=reset]').addEventListener("click", function () {
-            if (current_game == "all") {
-                for (const [game, val] of Object.entries(game_map)) {
-                    name_list = game_map[game][0]
+            if (confirm("Are you sure you want to reset?")) {
+                if (current_game == "all") {
+                    for (const [game, val] of Object.entries(game_map)) {
+                        name_list = game_map[game][0]
+                        for (const name of name_list) {
+                            document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
+                            document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
+                        }
+                        count = 0
+                        document.getElementById(`count`).textContent = 0
+                    }
+                }
+                else {
+                    name_list = game_map[current_game][0]
                     for (const name of name_list) {
-                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
-                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
+                        document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
+                        document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
                     }
                     count = 0
                     document.getElementById(`count`).textContent = 0
                 }
-            }
-            else {
-                name_list = game_map[current_game][0]
-                for (const name of name_list) {
-                    document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
-                    document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
-                }
-                count = 0
-                document.getElementById(`count`).textContent = 0
-            }
-
-            
+            }    
         });
 
         function initialize_game(game) {
