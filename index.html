@@ -49,73 +49,75 @@
     </div>
 
     <div class="right">
-        <b><center><label id='fe1Label'></label></center></b>
+        <br><b><center><label id='fe1Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
         <table border='0' id='fe1Table'></table>
 
-        <b><center><label id='fe2Label'></label></center></b>
+        <b><center><label id='fe2Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe2.png" width="200" hidden id='fe2Logo'></img></center>
         <table border='0' id='fe2Table'></table>
 
-        <b><center><label id='fe3Label'></label></center></b>
+        <b><center><label id='fe3Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe3.png" width="200" hidden id='fe3Logo'></img></center>
         <table border='0' id='fe3Table'></table>
 
-        <b><center><label id='fe4Label'></label></center></b>
+        <b><center><label id='fe4Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe4.png" width="200" hidden id='fe4Logo'></img></center>
         <table border='0' id='fe4Table'></table>
 
-        <b><center><label id='fe5Label'></label></center></b>
+        <b><center><label id='fe5Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe5.png" width="200" hidden id='fe5Logo'></img></center>
         <table border='0' id='fe5Table'></table>
 
-        <b><center><label id='fe6Label'></label></center></b>
+        <b><center><label id='fe6Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe6.png" width="200" hidden id='fe6Logo'></img></center>
         <table border='0' id='fe6Table'></table>
 
-        <b><center><label id='fe7Label'></label></center></b>
+        <b><center><label id='fe7Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe7.png" width="200" hidden id='fe7Logo'></img></center>
         <table border='0' id='fe7Table'></table>
 
-        <b><center><label id='fe8Label'></label></center></b>
+        <b><center><label id='fe8Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe8.png" width="200" hidden id='fe8Logo'></img></center>
         <table border='0' id='fe8Table'></table>
 
-        <b><center><label id='fe9Label'></label></center></b>
+        <b><center><label id='fe9Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe9.png" width="200" hidden id='fe9Logo'></img></center>
         <table border='0' id='fe9Table'></table>
 
-        <b><center><label id='fe10Label'></label></center></b>
+        <b><center><label id='fe10Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe10.png" width="200" hidden id='fe10Logo'></img></center>
         <table border='0' id='fe10Table'></table>
 
-        <b><center><label id='fe11Label'></label></center></b>
+        <b><center><label id='fe11Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe11.png" width="200" hidden id='fe11Logo'></img></center>
         <table border='0' id='fe11Table'></table>
 
-        <b><center><label id='fe12Label'></label></center></b>
+        <b><center><label id='fe12Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe12.png" width="200" hidden id='fe12Logo'></img></center>
         <table border='0' id='fe12Table'></table>
 
-        <b><center><label id='fe13Label'></label></center></b>
+        <b><center><label id='fe13Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe13.png" width="200" hidden id='fe13Logo'></img></center>
         <table border='0' id='fe13Table'></table>
 
-        <b><center><label id='fe14Label'></label></center></b>
+        <b><center><label id='fe14Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe14.png" width="200" hidden id='fe14Logo'></img></center>
         <table border='0' id='fe14Table'></table>
 
-        <b><center><label id='fe15Label'></label></center></b>
+        <b><center><label id='fe15Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe15.png" width="200" hidden id='fe15Logo'></img></center>
         <table border='0' id='fe15Table'></table>
 
-        <b><center><label id='fe16Label'></label></center></b>
+        <b><center><label id='fe16Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe16.png" width="200" hidden id='fe16Logo'></img></center>
         <table border='0' id='fe16Table'></table>
 
-        <b><center><label id='fe17Label'></label></center></b>
+        <b><center><label id='fe17Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe17.png" width="200" hidden id='fe17Logo'></img></center>
         <table border='0' id='fe17Table'></table>
+
+        <br>
     </div>
 
     <script src='./names.js'></script>
@@ -260,7 +262,6 @@
 
             document.getElementById(`gamename`).textContent = title
             document.getElementById(`${game}Label`).textContent = title
-            console.log("visiblilty")
             document.getElementById(`${game}Logo`).removeAttribute("hidden")
 
             //add in an element for each name in fe1_names
@@ -270,6 +271,7 @@
                 //equivalent to <td id='text_marth'>Marth</td>
                 const nameTd = document.createElement('td')
                 nameTd.textContent = default_text
+                nameTd.style="color:#ffffff"
                 nameTd.id = `text_${replaceName(name)}_${game}`
                 nameRow.appendChild(nameTd)
 
