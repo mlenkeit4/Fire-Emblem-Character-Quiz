@@ -24,16 +24,74 @@ var fe2_names = [
 
 ]
 var fe3_names = [
-
+    'Marth', 'Luke', 'Arran', 'Cecil', 'Roderick', 'Gordin', 'Ryan', 'Draug', 'Marisha',
+    'Catria', 'Warren', 'Linde',
+    'Palla', 'Julian', 'Matthis',
+    'Ogma', 'Yuliya', 'Jubelo', 'Sirius', 'Castor', 'Caeda',
+    'Rickard', 'Samuel', 'Wendell',
+    'Navarre', 'Phina',
+    'Cain', 'Bantu', 'Jeorge',
+    'Minerva',
+    'Merric', 'Arlen',
+    'Xane', 'Tiki',
+    'Est', 'Abel',
+    'Astram',
+    'Sheena', 'Samson',
+    'Roshea',
+    'Midia',
+    'Lena', 'Nyna', 'Maria', 'Elice'
 ]
 var fe4_names = [
 
 ]
 var fe5_names = [
-
+    'Leif', 'Finn', 'Osian', 'Halvan', 'Eyvel', 'Dagdar', 'Tanya', 'Marty',
+    'Ronan',
+    'Safy', 'Lifis',
+    'Machyua', 'Brighton', 'Lara', 'Fergus', 'Karin', 'Dalsin',
+    'Asbel',
+    'Nanna',
+    'Hicks',
+    'Shiva',
+    'Carrion',
+    'Selphina', 'Cain', 'Alva', 'Robert',
+    'Fred', 'Olwen',
+    'Mareeta',
+    'Salem', 'Perne', 'Troude', 'Tina',
+    'Glade',
+    'Deen', 'Eda', 'Homer',
+    'Linoan',
+    'Ralf',
+    'Ilios', 'Sleuf',
+    'Misha',
+    'Sara', 'Shannam', 'Miranda',
+    'Xavier',
+    'Amalda', 'Conomor',
+    'Diarmuid',
+    'Saias', 'Ced',
+    'Galzus'
 ]
 var fe6_names = [
-
+    'Roy', 'Marcus', 'Alen', 'Lance', 'Wolt', 'Bors',
+    'Merlinus', 'Elen', 'Dieck', 'Ward', 'Lot', 'Shanna',
+    'Chad', 'Lugh',
+    'Clarine', 'Rutger',
+    'Saul', 'Dorothy', 'Sue',
+    'Zelot', 'Trec', 'Noah',
+    'Astolfo', 'Lilina', 'Barthe', 'Ogier', 'Gwendolyn',
+    'Fir', 'Sin',
+    'Geese', 'Gonzalez',
+    'Klein', 'Thea', 'Larum', 'Echidna',
+    'Elffin', 'Bartre',
+    'Raigh', 'Cath',
+    'Melady', 'Perceval',
+    'Cecilia', 'Sophia',
+    'Igrene', 'Garret', 'Fae',
+    'Hugh', 'Zeiss',
+    'Douglas',
+    'Niime', 'Juno', 'Dayan',
+    'Yoder',
+    'Karel'
 ]
 var fe7_names = [
     'Hector', 'Matthew',
