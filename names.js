@@ -47,7 +47,14 @@ var fe3_names = [
     'Lena', 'Nyna', 'Maria', 'Elice'
 ]
 var fe4_names = [
-
+    'Sigurd', 'Naoise', 'Alec', 'Arden', 'Azelle', 'Lex', 'Quan', 'Finn', 'Ethlyn', 'Midir',
+    'Dew', 'Edain', 'Ayra', 'Deirdre', 'Jamke',
+    'Chulainn', 'Lachesis', 'Beowulf', 'Lewyn', 'Silvia', 'Erinys',
+    'Brigid', 'Tailtiu', 'Claud',
+    'Seliph', 'Scathach', 'Larcei', 'Lana', 'Diarmuid', 'Lester', 'Oifey', 'Julia', 'Fee', 'Arthur', 'Iucharba', 'Iuchar',
+    'Leif', 'Nanna', 'Shannan', 'Patty', 'Ares', 'Lene', 'Tine',
+    'Febail', 'Ced',
+    'Hannibal', 'Coirpre', 'Altena'    
 ]
 var fe5_names = [
     'Leif', 'Finn', 'Osian', 'Halvan', 'Eyvel', 'Dagdar', 'Tanya', 'Marty',
