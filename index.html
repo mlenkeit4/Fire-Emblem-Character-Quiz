@@ -22,8 +22,7 @@
             <input type='text' name='charname'><br>
         </form>
         <b><p style="font-size:24px" id="gamename"></p></b>
-        <label for="gameselect">Game:</label>
-
+        <b><label for="gameselect">Game:</label></b>
         <select name="gameselect" id="gameselect">
             <option value="fe1">Shadow Dragon NES</option>
             <option value="fe2">Gaiden</option>
@@ -44,69 +43,69 @@
             <option value="fe17">Engage</option>
             <option value="all">All</option>
         </select>
+        <br><b><label>Count: </label></b><label id="count"></label><label>/</label><label id="totalCount"></label>
+        <br><br>
+        <button name="reset">Reset</button>
     </div>
 
-    <b><center><label id='fe1Label'></label></center></b>
-    <table border='0' id='fe1Table'></table>
+    <div class="right">
+        <b><center><label id='fe1Label'></label></center></b>
+        <table border='0' id='fe1Table'></table>
 
-    <b><center><label id='fe2Label'></label></center></b>
-    <table border='0' id='fe2Table'></table>
+        <b><center><label id='fe2Label'></label></center></b>
+        <table border='0' id='fe2Table'></table>
 
-    <b><center><label id='fe3Label'></label></center></b>
-    <table border='0' id='fe3Table'></table>
+        <b><center><label id='fe3Label'></label></center></b>
+        <table border='0' id='fe3Table'></table>
 
-    <b><center><label id='fe4Label'></label></center></b>
-    <table border='0' id='fe4Table'></table>
+        <b><center><label id='fe4Label'></label></center></b>
+        <table border='0' id='fe4Table'></table>
 
-    <b><center><label id='fe5Label'></label></center></b>
-    <table border='0' id='fe5Table'></table>
+        <b><center><label id='fe5Label'></label></center></b>
+        <table border='0' id='fe5Table'></table>
 
-    <b><center><label id='fe6Label'></label></center></b>
-    <table border='0' id='fe6Table'></table>
+        <b><center><label id='fe6Label'></label></center></b>
+        <table border='0' id='fe6Table'></table>
 
-    <b><center><label id='fe7Label'></label></center></b>
-    <table border='0' id='fe7Table'></table>
+        <b><center><label id='fe7Label'></label></center></b>
+        <table border='0' id='fe7Table'></table>
 
-    <b><center><label id='fe8Label'></label></center></b>
-    <table border='0' id='fe8Table'></table>
+        <b><center><label id='fe8Label'></label></center></b>
+        <table border='0' id='fe8Table'></table>
 
-    <b><center><label id='fe9Label'></label></center></b>
-    <table border='0' id='fe9Table'></table>
+        <b><center><label id='fe9Label'></label></center></b>
+        <table border='0' id='fe9Table'></table>
 
-    <b><center><label id='fe10Label'></label></center></b>
-    <table border='0' id='fe10Table'></table>
+        <b><center><label id='fe10Label'></label></center></b>
+        <table border='0' id='fe10Table'></table>
 
-    <b><center><label id='fe11Label'></label></center></b>
-    <table border='0' id='fe11Table'></table>
+        <b><center><label id='fe11Label'></label></center></b>
+        <table border='0' id='fe11Table'></table>
 
-    <b><center><label id='fe12Label'></label></center></b>
-    <table border='0' id='fe12Table'></table>
+        <b><center><label id='fe12Label'></label></center></b>
+        <table border='0' id='fe12Table'></table>
 
-    <b><center><label id='fe13Label'></label></center></b>
-    <table border='0' id='fe13Table'></table>
+        <b><center><label id='fe13Label'></label></center></b>
+        <table border='0' id='fe13Table'></table>
 
-    <b><center><label id='fe14Label'></label></center></b>
-    <table border='0' id='fe14Table'></table>
+        <b><center><label id='fe14Label'></label></center></b>
+        <table border='0' id='fe14Table'></table>
 
-    <b><center><label id='fe15Label'></label></center></b>
-    <table border='0' id='fe15Table'></table>
+        <b><center><label id='fe15Label'></label></center></b>
+        <table border='0' id='fe15Table'></table>
 
-    <b><center><label id='fe16Label'></label></center></b>
-    <table border='0' id='fe16Table'></table>
+        <b><center><label id='fe16Label'></label></center></b>
+        <table border='0' id='fe16Table'></table>
 
-    <b><center><label id='fe17Label'></label></center></b>
-    <table border='0' id='fe17Table'></table>
-
-
-    <button name="reset">
-        Reset
-    </button>
+        <b><center><label id='fe17Label'></label></center></b>
+        <table border='0' id='fe17Table'></table>
+    </div>
 
     <script src='./names.js'></script>
 
     <script>
-        var games = ["fe7"]
-        var all_games = ["fe11", "fe15", "fe12", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe13", "fe14", "fe16", "fe17"]
+        var current_game = "fe7"
+        const default_text = ` `.repeat(5)
 
         var game_map = {
             "fe1": [fe1_names, "Shadow Dragon NES"],
@@ -127,32 +126,40 @@
             "fe16": [fe16_names, "Three Houses"],
             "fe17": [fe17_names, "Engage"]
         }
-        for (const game of games) {
-            initialize_game(game)
-        }
+
+        document.getElementById(`count`).textContent = 0
+        document.getElementById(`totalCount`).textContent = 0
+
+        initialize_game(current_game)
         
         //Game select listener
         document.getElementById('gameselect').addEventListener('change', function () {
             //Reset the tables and labels for every game
-            for (const [game, val] of Object.entries(game_map)){
-                table = document.getElementById(`${game}Table`)
-                rows = table.rows.length
-                for (var i = 0; i < rows; i++) {
-                    table.deleteRow(-1);
-                }
-                label = document.getElementById(`${game}Label`)
-                label.textContent = ''
-            }
-            if (this.value == 'all'){
+            if (this.value != current_game){
+                document.getElementById(`count`).textContent = 0
+                document.getElementById(`totalCount`).textContent = 0
+
                 for (const [game, val] of Object.entries(game_map)){
-                    initialize_game(game)
+                    table = document.getElementById(`${game}Table`)
+                    rows = table.rows.length
+                    for (var i = 0; i < rows; i++) {
+                        table.deleteRow(-1);
+                    }
+                    label = document.getElementById(`${game}Label`)
+                    label.textContent = ''
                 }
+                if (this.value == 'all'){
+                    for (const [game, val] of Object.entries(game_map)){
+                        initialize_game(game)
+                    }
+                }
+                else{
+                    initialize_game(this.value)
+                }
+                current_game = this.value
+                document.querySelector('input[name=charname]').value = ''
             }
-            else{
-                initialize_game(this.value)
-            }
-            
-            document.querySelector('input[name=charname]').value = ''
+
         })
 
         //Listener for processing when the user types in a name
@@ -170,6 +177,8 @@
                         document.getElementById(`text_${replaceName(name)}_${game}`).textContent = listName(name)
                         document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
                         matched = true
+                        prevCount = document.getElementById(`count`).textContent
+                        document.getElementById(`count`).textContent = Number(prevCount) + 1
                     }
                 }
             }
@@ -179,18 +188,33 @@
             }
         });
 
-        //Listener for Reset button (TODO: make functional with new setup)
+        //Listener for Reset button
         document.querySelector('button[name=reset]').addEventListener("click", function () {
-            for (const name of name_list) {
-                document.getElementById(`text_${replaceName(name)}`).textContent = default_text
-                document.getElementById(`img_${replaceName(name)}`).style.visibility = 'hidden'
-                count = 0
+            if (current_game == "all") {
+                for (const [game, val] of Object.entries(game_map)) {
+                    name_list = game_map[game][0]
+                    for (const name of name_list) {
+                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
+                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
+                    }
+                    count = 0
+                    document.getElementById(`count`).textContent = 0
+                }
             }
+            else {
+                name_list = game_map[current_game][0]
+                for (const name of name_list) {
+                    document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
+                    document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
+                }
+                count = 0
+                document.getElementById(`count`).textContent = 0
+            }
+
+            
         });
 
         function initialize_game(game) {
-            const default_text = ` `.repeat(5)
-
             const gameTable = document.getElementById(`${game}Table`)
             gameTable.border = 1
 
@@ -234,10 +258,10 @@
 
                     gameTable.appendChild(nameRow)
                     gameTable.appendChild(imgRow)
-
-                    count = 0
                 }
             }
+            prevTotal = document.getElementById(`totalCount`).textContent
+            document.getElementById(`totalCount`).textContent = Number(prevTotal) + count
         }
         
         function replaceName(name) {
