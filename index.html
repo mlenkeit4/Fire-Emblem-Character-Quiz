@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fire Emblem Character Quiz</title>
+    <link href='./resources/css/index.css' type='text/css' rel='stylesheet'>
+    <style>
+        table {
+            margin: auto;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upper">
+        <form '>
+            <label for='charname'><b>Character name:</b></label><br>
+            <input type='text' name='charname'><br>
+        </form>
+        <b><p style="font-size:24px" id="gamename"></p></b>
+        <label for="gameselect">Game:</label>
+
+        <select name="gameselect" id="gameselect">
+            <option value="fe1">Shadow Dragon NES</option>
+            <option value="fe2">Gaiden</option>
+            <option value="fe3">Mystery of the Emblem</option>
+            <option value="fe4">Geneaology</option>
+            <option value="fe5">Thracia</option>
+            <option value="fe6">Binding Blade</option>
+            <option value="fe7" selected="selected">Blazing Blade</option>
+            <option value="fe8">Sacred Stones</option>
+            <option value="fe9">Path of Radiance</option>
+            <option value="fe10">Radiant Dawn</option>
+            <option value="fe11">Shadow Dragon DS</option>
+            <option value="fe12">New Mystery</option>
+            <option value="fe13">Awakening</option>
+            <option value="fe14">Fates</option>
+            <option value="fe15">Shadows of Valentia</option>
+            <option value="fe16">Three Houses</option>
+            <option value="fe17">Engage</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+    <b><center><label id='fe1Label'></label></center></b>
+    <table border='0' id='fe1Table'></table>
+
+    <b><center><label id='fe2Label'></label></center></b>
+    <table border='0' id='fe2Table'></table>
+
+    <b><center><label id='fe3Label'></label></center></b>
+    <table border='0' id='fe3Table'></table>
+
+    <b><center><label id='fe4Label'></label></center></b>
+    <table border='0' id='fe4Table'></table>
+
+    <b><center><label id='fe5Label'></label></center></b>
+    <table border='0' id='fe5Table'></table>
+
+    <b><center><label id='fe6Label'></label></center></b>
+    <table border='0' id='fe6Table'></table>
+
+    <b><center><label id='fe7Label'></label></center></b>
+    <table border='0' id='fe7Table'></table>
+
+    <b><center><label id='fe8Label'></label></center></b>
+    <table border='0' id='fe8Table'></table>
+
+    <b><center><label id='fe9Label'></label></center></b>
+    <table border='0' id='fe9Table'></table>
+
+    <b><center><label id='fe10Label'></label></center></b>
+    <table border='0' id='fe10Table'></table>
+
+    <b><center><label id='fe11Label'></label></center></b>
+    <table border='0' id='fe11Table'></table>
+
+    <b><center><label id='fe12Label'></label></center></b>
+    <table border='0' id='fe12Table'></table>
+
+    <b><center><label id='fe13Label'></label></center></b>
+    <table border='0' id='fe13Table'></table>
+
+    <b><center><label id='fe14Label'></label></center></b>
+    <table border='0' id='fe14Table'></table>
+
+    <b><center><label id='fe15Label'></label></center></b>
+    <table border='0' id='fe15Table'></table>
+
+    <b><center><label id='fe16Label'></label></center></b>
+    <table border='0' id='fe16Table'></table>
+
+    <b><center><label id='fe17Label'></label></center></b>
+    <table border='0' id='fe17Table'></table>
+
+
+    <button name="reset">
+        Reset
+    </button>
+
+    <script src='./names.js'></script>
+
+    <script>
+        var games = ["fe7"]
+        var all_games = ["fe11", "fe15", "fe12", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe13", "fe14", "fe16", "fe17"]
+
+        var game_map = {
+            "fe1": [fe1_names, "Shadow Dragon NES"],
+            "fe2": [fe2_names, "Gaiden"],
+            "fe3": [fe3_names, "Mystery of the Emblem"],
+            "fe4": [fe4_names, "Geneaology"],
+            "fe5": [fe5_names, "Thracia 776"],
+            "fe6": [fe6_names, "Binding Blade"],
+            "fe7": [fe7_names, "Blazing Blade"],
+            "fe8": [fe8_names, "Sacred Stones"],
+            "fe9": [fe9_names, "Path of Radiance"],
+            "fe10": [fe10_names, "Radiant Dawn"],
+            "fe11": [fe11_names, "Shadow Dragon DS"],
+            "fe12": [fe12_names, "New Mystery"],
+            "fe13": [fe13_names, "Awakening"],
+            "fe14": [fe14_names, "Fates"],
+            "fe15": [fe15_names, "Shadows of Valentia"],
+            "fe16": [fe16_names, "Three Houses"],
+            "fe17": [fe17_names, "Engage"]
+        }
+        for (const game of games) {
+            initialize_game(game)
+        }
+        
+        //Game select listener
+        document.getElementById('gameselect').addEventListener('change', function () {
+            //Reset the tables and labels for every game
+            for (const [game, val] of Object.entries(game_map)){
+                table = document.getElementById(`${game}Table`)
+                rows = table.rows.length
+                for (var i = 0; i < rows; i++) {
+                    table.deleteRow(-1);
+                }
+                label = document.getElementById(`${game}Label`)
+                label.textContent = ''
+            }
+            if (this.value == 'all'){
+                for (const [game, val] of Object.entries(game_map)){
+                    initialize_game(game)
+                }
+            }
+            else{
+                initialize_game(this.value)
+            }
+            
+            document.querySelector('input[name=charname]').value = ''
+        })
+
+        //Listener for processing when the user types in a name
+        document.querySelector('input[name=charname]').addEventListener('keyup', function () {
+            let matched = false
+            
+            //Iterate over all the games
+            for (const [game, val] of Object.entries(game_map)) {
+                name_list = val[0]
+                //Check if the input is in all of the lists (excluding the All list)
+                if (name_list.includes(listName(this.value))){
+                    name = replaceName(listName(this.value).toLowerCase())
+                    image = document.getElementById(`img_${replaceName(name)}_${game}`)
+                    if (image != null && image.style.visibility == 'hidden') {
+                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = listName(name)
+                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
+                        matched = true
+                    }
+                }
+            }
+            //Clears input if a name was successfully matched
+            if (matched) {
+                this.value = ''
+            }
+        });
+
+        //Listener for Reset button (TODO: make functional with new setup)
+        document.querySelector('button[name=reset]').addEventListener("click", function () {
+            for (const name of name_list) {
+                document.getElementById(`text_${replaceName(name)}`).textContent = default_text
+                document.getElementById(`img_${replaceName(name)}`).style.visibility = 'hidden'
+                count = 0
+            }
+        });
+
+        function initialize_game(game) {
+            const default_text = ` `.repeat(5)
+
+            const gameTable = document.getElementById(`${game}Table`)
+            gameTable.border = 1
+
+            var nameRow = document.createElement('tr')
+            var imgRow = document.createElement('tr')
+
+            gameTable.appendChild(nameRow)
+            gameTable.appendChild(imgRow)
+            
+            var name_list = game_map[game][0]
+            var title = game_map[game][1]
+
+            document.getElementById(`gamename`).textContent = title
+            document.getElementById(`${game}Label`).textContent = title
+
+            //add in an element for each name in fe1_names
+            var count = 0
+            var cols= 10
+            for (const name of name_list) {
+                //equivalent to <td id='text_marth'>Marth</td>
+                const nameTd = document.createElement('td')
+                nameTd.textContent = default_text
+                nameTd.id = `text_${replaceName(name)}_${game}`
+                nameRow.appendChild(nameTd)
+
+                const imgTd = document.createElement('td')
+                const img = document.createElement('img')
+                img.src = `assets/portraits/${game}/${replaceName(name)}.png`
+                img.style.visibility = 'hidden'
+                img.id = `img_${replaceName(name)}_${game}`
+                img.width = 100
+                img.height = 100
+                imgTd.appendChild(img)
+                imgRow.appendChild(imgTd)
+
+                //starting a new row wiith every 10th character
+                count = count + 1
+                if (count % cols == 0) {
+                    nameRow = document.createElement('tr')
+                    imgRow = document.createElement('tr')
+
+                    gameTable.appendChild(nameRow)
+                    gameTable.appendChild(imgRow)
+
+                    count = 0
+                }
+            }
+        }
+        
+        function replaceName(name) {
+            return name.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')
+        }
+
+        function listName(name) {
+            if (name.includes(" ")){
+                index = name.indexOf(" ")
+                return name.substring(0,1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
+                        + name.substring(index+1, index+2).toUpperCase() + name.substring(index+2).toLowerCase()
+            }
+            return name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase()
+        }
+
+    </script>
+
+</body>
+
+</html>

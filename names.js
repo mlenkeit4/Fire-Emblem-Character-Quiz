@@ -1,0 +1,257 @@
+var fe1_names = [
+    'Marth', 'Cain', 'Abel', 'Jagen', 'Gordin', 'Draug', 'Caeda', 'Wrys', 
+    'Bord', 'Cord', 'Barst', 'Ogma', 'Darros', 'Castor', 
+    'Julian', 'Lena', 'Navarre',
+    'Matthis', 'Merric',
+    'Roshea', 'Vyland', 'Sedgar', 'Wolf', 'Hardin', 'Wendell',
+    'Rickard',
+    'Bantu',
+    'Caesar', 'Radd', 'Roger',
+    'Jeorge',
+    'Maria', 'Minerva',
+    'Linde', 'Jake',
+    'Dolph', 'Macellan', 'Tomas', 'Boah', 'Midia',
+    'Astram', 'Beck',
+    'Catria', 'Palla',
+    'Arran', 'Samson', 'Xane',
+    'Est',
+    'Tiki',
+    'Lorenz',
+    'Elice',
+    'Gotoh'
+];
+var fe2_names = [
+
+]
+var fe3_names = [
+
+]
+var fe4_names = [
+
+]
+var fe5_names = [
+
+]
+var fe6_names = [
+
+]
+var fe7_names = [
+    'Hector', 'Matthew',
+    'Oswin', 'Serra', 'Eliwood', 'Marcus', 'Lowen', 'Rebecca', 'Dorcas', 'Bartre',
+    'Guy',
+    'Merlinus',
+    'Erk', 'Priscilla',
+    'Lyn', 'Sain', 'Kent', 'Wil', 'Florina',
+    'Raven', 'Lucius',
+    'Canas',
+    'Dart', 'Fiora',
+    'Legault',
+    'Ninian',
+    'Isadora', 'Heath', 'Rath',
+    'Hawkeye',
+    'Geitz', 'Wallace',
+    'Farina',
+    'Pent', 'Louise',
+    'Karel', 'Harken',
+    'Nino', 'Jaffar',
+    'Vaida',
+    'Nils',
+    'Karla',
+    'Renault',
+    'Athos'
+]
+var fe8_names = [
+    'Eirika', 'Seth',
+    'Franz', 'Gilliam',
+    'Vanessa', 'Moulder', 'Ross', 'Garcia',
+    'Neimi', 'Colm',
+    'Artur', 'Lute',
+    'Natasha', 'Joshua',
+    'Ephraim', 'Forde', 'Kyle', 'Orson',
+    'Tana', 'Amelia',
+    'Innes', 'Gerik', 'Tethys', 'Marisa',
+    "L'Arachel", 'Dozla',
+    'Saleh', 'Ewan',
+    'Cormag', 'Rennac',
+    'Duessel', 'Knoll',
+    'Myrrh',
+    'Syrene'
+]
+var fe9_names = [
+    'Ike',
+    'Boyd', 'Titania', 'Oscar',
+    'Rhys',
+    'Shinon', 'Gatrie',
+    'Soren',
+    'Mia',
+    'Ilyana',
+    'Mist', 'Rolf', 'Marcia',
+    'Lethe', 'Mordecai', 'Volke',
+    'Kieran', 'Nephenee', 'Brom', 'Zihark',
+    'Sothe', 'Jill',
+    'Astrid',
+    'Makalov',
+    'Tormod', 'Muarim', 'Stefan',
+    'Devdan',
+    'Tanith', 'Reyson', 'Janaff', 'Ulki',
+    'Calill',
+    'Tauroneo',
+    'Ranulf', 'Haar',
+    'Bastian', 'Lucia', 
+    'Geoffrey', 'Largo',
+    'Elincia',
+    'Nasir', 'Ena',
+    'Tibarn', 'Naesala', 'Giffca'
+]
+var fe10_names = [
+    'Micaiah', 'Edward', 'Leonardo',
+    'Nolan',
+    'Laura', 'Sothe',
+    'Ilyana', 'Aran',
+    'Meg',
+    'Volug', 'Tauroneo', 'Jill', 'Zihark',
+    'Fiona',
+    'Tormod', 'Muarim', 'Vika',
+    'Rafiel', 'Nailah',
+    'Black Knight',
+    'Elincia', 'Marcia', 'Nealuchi', 'Leanne', 'Haar',
+    'Brom', 'Nephenee', 'Heather',
+    'Lucia', 'Lethe', 'Mordecai',
+    'Geoffrey', 'Kieran', 'Astrid', 'Makalov', 'Danved',
+    'Calill',
+    'Ike', 'Titania', 'Soren', 'Mist', 'Rolf', 'Boyd', 'Oscar', 'Shinon', 'Gatrie', 'Rhys', 'Mia',
+    'Ranulf',
+    'Kyza', 'Lyre',
+    'Reyson', 'Janaff', 'Ulki',
+    'Sigrun', 'Tanith',
+    'Skrimir', 'Sanaki', 'Naesala',
+    'Tibarn', 'Pelleas',
+    'Stefan',
+    'Oliver',
+    'Bastian', 'Volke',
+    'Caineghis', 'Giffca', 'Kurthnaga', 'Ena', 'Renning',
+    'Gareth', 'Nasir',
+    'Sephiran'
+]
+var fe11_names = [
+    'Marth', 'Cain', 'Abel', 'Frey', 'Jagen', 'Gordin', 'Draug', 'Caeda', 'Norne', 'Wrys',  
+    'Bord', 'Cord', 'Barst', 'Ogma', 'Darros', 'Castor', 
+    'Julian', 'Lena', 'Navarre',
+    'Matthis', 'Merric',
+    'Roshea', 'Vyland', 'Sedgar', 'Wolf', 'Hardin', 'Wendell',
+    'Rickard',
+    'Athena',
+    'Bantu',
+    'Caesar', 'Radd', 'Roger',
+    'Jeorge',
+    'Maria', 'Minerva',
+    'Linde', 'Jake',
+    'Dolph', 'Macellan', 'Tomas', 'Boah', 'Midia',
+    'Horace',
+    'Astram', 'Beck',
+    'Catria', 'Palla',
+    'Arran', 'Samson', 'Xane',
+    'Etzel',
+    'Est',
+    'Tiki',
+    'Lorenz',
+    'Ymir',
+    'Elice',
+    'Gotoh',
+    'Nagi'
+];
+var fe12_names = [
+
+]
+var fe13_names = [
+    'Robin', 'Chrom',
+    'Lissa', 'Frederick',
+    'Sully', 'Virion',
+    'Stahl', 'Vaike', 'Miriel',
+    'Sumia', 'Kellam',
+    'Donnel',
+    "Lon'qu",
+    'Ricken', 'Maribelle',
+    'Panne', 'Gaius',
+    'Cordelia',
+    'Gregor', 'Nowi',
+    'Libra', 'Tharja',
+    'Anna',
+    'Olivia',
+    'Cherche',
+    'Henry',
+    "Say'ri",
+    'Tiki',
+    'Basilio',
+    'Flavia',
+    'Lucina',
+    'Owain', 'Inigo', 'Brady', 'Kjelle', 'Cynthia', 'Severa', 'Gerome', 'Morgan', 'Yarne', 'Laurent', 'Noire', 'Nah'
+]
+var fe14_names = [
+    'Corrin',
+    'Felicia', 'Jakob',
+    'Rinkah', 'Kaze',
+    'Sakura', 'Azura',
+    'Hana', 'Subaki', 'Saizo', 'Orochi', 'Silas',
+    'Mozu',
+    'Hinoka', 'Azama', 'Setsuna', 'Hayato',
+    'Oboro', 'Hinata',
+    'Takumi', 'Kagero',
+    'Reina',
+    'Kaden',
+    'Ryoma', 'Scarlet',
+    'Izana',
+    'Shura',
+    'Yukimura',
+    'Elise', 'Effie', 'Arthur',
+    'Odin', 'Niles',
+    'Nyx',
+    'Camilla', 'Selena', 'Beruka',
+    'Laslow', 'Peri',
+    'Benny', 'Charlotte',
+    'Leo', 'Keaton',
+    'Gunter',
+    'Xander',
+    'Flora',
+    'Fuga',
+    'Kana', 'Shigure', 'Dwyer', 'Sophie', 'Midori',
+    'Shiro', 'Kiragi', 'Asugi', 'Selkie', 'Hisame', 'Mitama', 'Caeldori', 'Rhajat',
+    'Siegbert', 'Forrest', 'Ignatius', 'Velouria', 'Percy', 'Ophelia', 'Soleil', 'Nina'
+]
+var fe15_names = [
+
+]
+var fe16_names = [
+    'Byleth',
+    'Edelgard', 'Hubert', 'Ferdinand', 'Linhardt', 'Caspar', 'Bernadetta', 'Dorothea', 'Petra',
+    'Dimitri', 'Dedue', 'Felix', 'Ashe', 'Sylvain', 'Mercedes', 'Annette', 'Ingrid',
+    'Claude', 'Lorenz', 'Raphael', 'Ignatz', 'Lysithea', 'Marianne', 'Hilda', 'Leonie',
+    'Seteth', 'Flayn', 'Hanneman', 'Manuela', 'Gilbert', 'Alois', 'Catherine', 'Shamir', 'Cyril',
+    'Jeritza', 'Anna', 'Yuri', 'Balthus', 'Constance', 'Hapi'
+]
+var fe17_names = [
+    'Alear',
+    'Vander',
+    'Clanne', 'Framme',
+    'Alfred', 'Etie', 'Boucheron',
+    'Celine', 'Chloe', 'Louis',
+    'Jean',
+    'Yunaka',
+    'Anna',
+    'Alcryst', 'Citrinne', 'Lapis',
+    'Diamant', 'Amber',
+    'Jade',
+    'Ivy', 'Kagetsu', 'Zelkov',
+    'Fogado', 'Pandreo', 'Bunet',
+    'Timerra', 'Panette', 'Merrin',
+    'Hortensia',
+    'Seadall',
+    'Rosado', 'Goldmary',
+    'Lindon',
+    'Saphir',
+    'Mauvier',
+    'Veyle',
+    'Nel',
+    'Nil',
+    'Zelestia', 'Gregory', 'Madeline'
+]

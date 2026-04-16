@@ -1,0 +1,41 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+h1 {
+  color: SeaGreen;
+}
+
+
+p, 
+li {
+  font-size: 18px;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+.myCheckbox {
+  text-align : center;
+}
+
+script {
+  display: none;
+}
+
+td {
+    width: 5em;
+    height: 1em;
+    text-align : center;
+}
+
+.upper{
+    position: fixed;
+    top: 0px;
+    background: #c9c9c9;   
+    display: block;
+
+}
