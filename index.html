@@ -259,8 +259,10 @@
                     for (const game of list_for_all_games) {
                         name_list = game_map[game][0]
                         for (const name of name_list) {
+                            if (document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility != 'visible') {
+                                document.getElementById(`text_${replaceName(name)}_${game}`).style=giveupColor
+                            }
                             document.getElementById(`text_${replaceName(name)}_${game}`).textContent = name
-                            document.getElementById(`text_${replaceName(name)}_${game}`).style=giveupColor
                             document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
                         }
                     }
@@ -268,8 +270,10 @@
                 else {
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
+                        if (document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility != 'visible') {
+                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style=giveupColor
+                        }
                         document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = name
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).style=giveupColor
                         document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'visible'
                     }
                 }
