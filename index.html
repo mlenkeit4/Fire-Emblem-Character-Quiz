@@ -53,13 +53,25 @@
         <center><img src="assets/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
         <table border='0' id='fe1Table'></table>
 
+        <b><center><label id='fe11Label' style="color:#ffffff"></label></center></b>
+        <center><img src="assets/logos/fe11.png" width="200" hidden id='fe11Logo'></img></center>
+        <table border='0' id='fe11Table'></table>
+
         <b><center><label id='fe2Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe2.png" width="200" hidden id='fe2Logo'></img></center>
         <table border='0' id='fe2Table'></table>
 
+        <b><center><label id='fe15Label' style="color:#ffffff"></label></center></b>
+        <center><img src="assets/logos/fe15.png" width="200" hidden id='fe15Logo'></img></center>
+        <table border='0' id='fe15Table'></table>
+
         <b><center><label id='fe3Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe3.png" width="200" hidden id='fe3Logo'></img></center>
         <table border='0' id='fe3Table'></table>
+
+        <b><center><label id='fe12Label' style="color:#ffffff"></label></center></b>
+        <center><img src="assets/logos/fe12.png" width="200" hidden id='fe12Logo'></img></center>
+        <table border='0' id='fe12Table'></table>
 
         <b><center><label id='fe4Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe4.png" width="200" hidden id='fe4Logo'></img></center>
@@ -89,14 +101,6 @@
         <center><img src="assets/logos/fe10.png" width="200" hidden id='fe10Logo'></img></center>
         <table border='0' id='fe10Table'></table>
 
-        <b><center><label id='fe11Label' style="color:#ffffff"></label></center></b>
-        <center><img src="assets/logos/fe11.png" width="200" hidden id='fe11Logo'></img></center>
-        <table border='0' id='fe11Table'></table>
-
-        <b><center><label id='fe12Label' style="color:#ffffff"></label></center></b>
-        <center><img src="assets/logos/fe12.png" width="200" hidden id='fe12Logo'></img></center>
-        <table border='0' id='fe12Table'></table>
-
         <b><center><label id='fe13Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe13.png" width="200" hidden id='fe13Logo'></img></center>
         <table border='0' id='fe13Table'></table>
@@ -104,10 +108,6 @@
         <b><center><label id='fe14Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe14.png" width="200" hidden id='fe14Logo'></img></center>
         <table border='0' id='fe14Table'></table>
-
-        <b><center><label id='fe15Label' style="color:#ffffff"></label></center></b>
-        <center><img src="assets/logos/fe15.png" width="200" hidden id='fe15Logo'></img></center>
-        <table border='0' id='fe15Table'></table>
 
         <b><center><label id='fe16Label' style="color:#ffffff"></label></center></b>
         <center><img src="assets/logos/fe16.png" width="200" hidden id='fe16Logo'></img></center>
@@ -127,6 +127,9 @@
         const default_text = ` `.repeat(5)
 
         var games = ["fe1", "fe2", "fe3", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe11", "fe12", "fe13", "fe14", "fe15", "fe16", "fe17"]
+        var list_for_all_games = ["fe11", "fe15", "fe12", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe13", "fe14", "fe16", "fe17"]
+
+        var num_cols = 15
 
         var game_map = {
             "fe1": [fe1_names, "Shadow Dragon NES"],
@@ -161,7 +164,7 @@
                 document.getElementById(`totalCount`).textContent = 0
 
                 if (current_game == 'all'){
-                    for (const game of games) {
+                    for (const game of list_for_all_games) {
                         document.getElementById(`${game}Logo`).setAttribute("hidden", "hidden")
                         document.getElementById(`${game}Table`).border = 0
                     }
@@ -181,7 +184,7 @@
                     label.textContent = ''
                 }
                 if (this.value == 'all'){
-                    for (const game of games){
+                    for (const game of list_for_all_games){
                         initialize_game(game)
                     }
                 }
@@ -266,7 +269,6 @@
 
             //add in an element for each name in fe1_names
             var count = 0
-            var cols= 10
             for (const name of name_list) {
                 //equivalent to <td id='text_marth'>Marth</td>
                 const nameTd = document.createElement('td')
@@ -280,14 +282,14 @@
                 img.src = `assets/portraits/${game}/${replaceName(name)}.png`
                 img.style.visibility = 'hidden'
                 img.id = `img_${replaceName(name)}_${game}`
-                img.width = 100
-                img.height = 100
+                img.width = 1000 / num_cols
+                img.height = 1000 / num_cols
                 imgTd.appendChild(img)
                 imgRow.appendChild(imgTd)
 
                 //starting a new row wiith every 10th character
                 count = count + 1
-                if (count % cols == 0) {
+                if (count % num_cols == 0) {
                     nameRow = document.createElement('tr')
                     imgRow = document.createElement('tr')
 
