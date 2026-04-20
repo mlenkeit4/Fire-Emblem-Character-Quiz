@@ -130,7 +130,7 @@
         var games = ["fe1", "fe2", "fe3", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe11", "fe12", "fe13", "fe14", "fe15", "fe16", "fe17"]
         var list_for_all_games = ["fe11", "fe15", "fe12", "fe4", "fe5", "fe6", "fe7", "fe8", "fe9", "fe10", "fe13", "fe14", "fe16", "fe17"]
 
-        var num_cols = 15
+        var num_cols = 10
 
         var game_map = {
             "fe1": [fe1_names, "Shadow Dragon NES"],
@@ -232,6 +232,7 @@
                         name_list = game_map[game][0]
                         for (const name of name_list) {
                             document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
+                            document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
                             document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
                         }
                         document.getElementById(`${game}Logo`).removeAttribute("hidden")
@@ -243,6 +244,7 @@
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
                         document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
+                        document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
                         document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
                     }
                     document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
