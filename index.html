@@ -43,6 +43,12 @@
             <option value="fe17">Engage</option>
             <option value="all">All</option>
         </select>
+        <b><label for="modeselect">Mode:</label></b>
+        <select name="modeselect" id="modeselect">
+            <option value="standard">Standard</option>
+            <option value="inorder">In-Order</option>
+            <option value="chaos">Chaos</option>
+        </select>
         <br><b><label>Count: </label></b><label id="count"></label><label>/</label><label id="totalCount"></label>
         <br><br>
         <button name="reset">Reset</button>
@@ -136,6 +142,8 @@
 
         var num_cols = 10
 
+        var current_mode = "standard"
+
         var game_map = {
             "fe1": [fe1_names, "Shadow Dragon NES"],
             "fe2": [fe2_names, "Gaiden"],
@@ -200,6 +208,26 @@
                 document.querySelector('input[name=charname]').value = ''
                 reset()
             }
+
+        })
+
+        //Mode select listener
+        document.getElementById('modeselect').addEventListener('change', function () {
+            //Reset the tables and labels for every game
+            if (this.value != current_mode){
+                if (confirm("Changing the mode will reset your progress. Proceed?")) {
+                    current_mode = this.value
+                    reset()
+                }
+                else {
+                    console.log(this.value)
+                    console.log(current_mode)
+                    this.value = current_mode
+                    console.log(this.value)
+                    console.log(current_mode)
+                }
+            }
+            
 
         })
 
