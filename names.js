@@ -56,6 +56,31 @@ var fe4_names = [
     'Febail', 'Ced',
     'Hannibal', 'Coirpre', 'Altena'    
 ]
+var fe4_gen1 = [
+    'Sigurd', 'Naoise', 'Alec', 'Arden', 'Azelle', 'Lex', 'Quan', 'Finn', 'Ethlyn', 'Midir',
+    'Dew', 'Edain', 'Ayra', 'Deirdre', 'Jamke',
+    'Chulainn', 'Lachesis', 'Beowulf', 'Lewyn', 'Silvia', 'Erinys',
+    'Brigid', 'Tailtiu', 'Claud',
+]
+var fe4_gen2nosubs = [
+    'Seliph', 'Scathach', 'Larcei', 'Lana', 'Diarmuid', 'Lester', 'Oifey', 'Julia', 'Fee', 'Arthur', 'Iucharba', 'Iuchar',
+    'Leif', 'Nanna', 'Finn', 'Shannan', 'Patty', 'Ares', 'Lene', 'Tine',
+    'Febail', 'Ced',
+    'Hannibal', 'Coirpre', 'Altena'    
+]
+var fe4_gen2 = [
+    'Seliph', 'Scathach', 'Dalvin', 'Larcei', 'Creidne', 'Lana', 'Muirne', 'Diarmuid', 'Tristan', 'Lester', 'Deimne', 'Oifey',
+    'Julia', 'Fee', 'Hermina', 'Arthur', 'Amid', 'Iucharba', 'Iuchar',
+    'Leif', 'Nanna', 'Jeanne', 'Finn', 'Shannan', 'Patty', 'Daisy', 'Ares', 'Lene', 'Laylea', 'Tine', 'Linda',
+    'Febail', 'Asaello', 'Ced', 'Hawk',
+    'Hannibal', 'Coirpre', 'Charlot', 'Altena'    
+]
+var fe4_substitutes = [
+    'Dalvin', 'Creidne', 'Muirne', 'Tristan', 'Deimne', 'Hermina', 'Amid',
+    'Jeanne', 'Daisy', 'Laylea', 'Linda',
+    'Asaello', 'Hawk',
+    'Charlot' 
+]
 var fe5_names = [
     'Leif', 'Finn', 'Osian', 'Halvan', 'Eyvel', 'Dagdar', 'Tanya', 'Marty',
     'Ronan',
@@ -260,7 +285,7 @@ var fe12_names = [
     'Nagi',
     'Lena', 'Nyna', 'Maria', 'Elice'
 ]
-var fe13_names = [
+var fe13_adults = [
     'Robin', 'Chrom',
     'Lissa', 'Frederick',
     'Sully', 'Virion',
@@ -281,6 +306,8 @@ var fe13_names = [
     'Tiki',
     'Basilio',
     'Flavia',
+]
+var fe13_children = [
     'Lucina',
     'Owain', 'Inigo', 'Brady', 'Kjelle', 'Cynthia', 'Severa', 'Gerome', 'Morgan', 'Yarne', 'Laurent', 'Noire', 'Nah'
 ]
