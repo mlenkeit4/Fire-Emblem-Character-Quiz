@@ -49,12 +49,16 @@
             <option value="inorder">In-Order</option>
             <option value="chaos">Chaos</option>
         </select>
+        <br>
+
         <br><b><label>Count: </label></b><label id="count"></label><label>/</label><label id="totalCount"></label>
-        <br><br>
-        <button name="reset">Reset</button>
+        <div>Timer: <span id="hours">0</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+        <br>
+        <input type="checkbox" id="warnings" name="warnings"/>
+        <label for="warnings">Show warnings?</label>
+        <br><button name="reset">Reset</button>
         <button name="give_up">Give Up</button>
         <br>
-        <div>Timer: <span id="hours">0</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
     </div>
 
     <div class="right">
@@ -172,41 +176,48 @@
         //Game select listener
         document.getElementById('gameselect').addEventListener('change', function () {
             //Reset the tables and labels for every game
+            console.log(document.getElementById("warnings").checked)
             if (this.value != current_game){
-                document.getElementById(`count`).textContent = 0
-                document.getElementById(`totalCount`).textContent = 0
+                if (!document.getElementById("warnings").checked || confirm("Changing the game will reset your progress. Proceed?")) {
+                    document.getElementById(`count`).textContent = 0
+                    document.getElementById(`totalCount`).textContent = 0
 
-                if (current_game == 'all'){
-                    for (const game of list_for_all_games) {
-                        document.getElementById(`${game}Logo`).setAttribute("hidden", "hidden")
-                        document.getElementById(`${game}Table`).border = 0
+                    if (current_game == 'all'){
+                        for (const game of list_for_all_games) {
+                            document.getElementById(`${game}Logo`).setAttribute("hidden", "hidden")
+                            document.getElementById(`${game}Table`).border = 0
+                        }
                     }
+                    else {
+                        document.getElementById(`${current_game}Logo`).setAttribute("hidden", "hidden")
+                        document.getElementById(`${current_game}Table`).border = 0
+                    }
+
+                    for (const game of games){
+                        table = document.getElementById(`${game}Table`)
+                        rows = table.rows.length
+                        for (var i = 0; i < rows; i++) {
+                            table.deleteRow(-1);
+                        }
+                        //label = document.getElementById(`${game}Label`)
+                        //label.textContent = ''
+                    }
+                    if (this.value == 'all'){
+                        for (const game of list_for_all_games){
+                            initialize_game(game)
+                        }
+                    }
+                    else{
+                        initialize_game(this.value)
+                    }
+                    current_game = this.value
+                    document.querySelector('input[name=charname]').value = ''
+                    reset()
                 }
                 else {
-                    document.getElementById(`${current_game}Logo`).setAttribute("hidden", "hidden")
-                    document.getElementById(`${current_game}Table`).border = 0
+                    this.value = current_game
                 }
-
-                for (const game of games){
-                    table = document.getElementById(`${game}Table`)
-                    rows = table.rows.length
-                    for (var i = 0; i < rows; i++) {
-                        table.deleteRow(-1);
-                    }
-                    //label = document.getElementById(`${game}Label`)
-                    //label.textContent = ''
-                }
-                if (this.value == 'all'){
-                    for (const game of list_for_all_games){
-                        initialize_game(game)
-                    }
-                }
-                else{
-                    initialize_game(this.value)
-                }
-                current_game = this.value
-                document.querySelector('input[name=charname]').value = ''
-                reset()
+                
             }
 
         })
@@ -215,16 +226,12 @@
         document.getElementById('modeselect').addEventListener('change', function () {
             //Reset the tables and labels for every game
             if (this.value != current_mode){
-                if (confirm("Changing the mode will reset your progress. Proceed?")) {
+                if (!document.getElementById("warnings").checked || confirm("Changing the mode will reset your progress. Proceed?")) {
                     current_mode = this.value
-                    reset()
+                    reset_game()
                 }
                 else {
-                    console.log(this.value)
-                    console.log(current_mode)
                     this.value = current_mode
-                    console.log(this.value)
-                    console.log(current_mode)
                 }
             }
             
@@ -270,37 +277,14 @@
 
         //Listener for Reset button
         document.querySelector('button[name=reset]').addEventListener("click", function () {
-            if (confirm("Are you sure you want to reset?")) {
-                if (current_game == "all") {
-                    for (const game of list_for_all_games) {
-                        name_list = game_map[game][0]
-                        for (const name of name_list) {
-                            document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
-                            document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
-                            document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
-                        }
-                        document.getElementById(`${game}Logo`).removeAttribute("hidden")
-
-                    }
-                    document.getElementById(`count`).textContent = 0
-                }
-                else {
-                    name_list = game_map[current_game][0]
-                    for (const name of name_list) {
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
-                        document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
-                    }
-                    document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
-                    document.getElementById(`count`).textContent = 0
-                }
-                reset()
+            if (!document.getElementById("warnings").checked || confirm("Are you sure you want to reset?")) {
+                reset_game()
             }    
         });
 
         //Listener for Give Up button
         document.querySelector('button[name=give_up]').addEventListener("click", function () {
-            if (confirm("Are you sure you want to give up?")) {
+            if (!document.getElementById("warnings").checked || confirm("Are you sure you want to give up?")) {
                 giveupColor = "color:#ff33ff"
                 stop()
                 if (current_game == "all") {
@@ -379,6 +363,33 @@
             document.getElementById(`totalCount`).textContent = Number(prevTotal) + count
         }
         
+        function reset_game() {
+            if (current_game == "all") {
+                    for (const game of list_for_all_games) {
+                        name_list = game_map[game][0]
+                        for (const name of name_list) {
+                            document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
+                            document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
+                            document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
+                        }
+                        document.getElementById(`${game}Logo`).removeAttribute("hidden")
+
+                    }
+                    document.getElementById(`count`).textContent = 0
+                }
+                else {
+                    name_list = game_map[current_game][0]
+                    for (const name of name_list) {
+                        document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
+                        document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
+                        document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
+                    }
+                    document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
+                    document.getElementById(`count`).textContent = 0
+                }
+                reset()
+        }
+
         function replaceName(name) {
             return name.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')
         }
