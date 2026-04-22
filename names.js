@@ -135,7 +135,7 @@ var fe6_names = [
 var fe6_trialmaps = [
     'Narcian', 'Galle', 'Hector', 'Brunnya', 'Eliwood', 'Murdock', 'Zephiel', 'Guinivere'
 ]
-var fe7_names = [
+var fe7_hectornames = [
     'Hector', 'Matthew',
     'Oswin', 'Serra', 'Eliwood', 'Marcus', 'Lowen', 'Rebecca', 'Dorcas', 'Bartre',
     'Guy',
@@ -159,6 +159,40 @@ var fe7_names = [
     'Karla',
     'Renault',
     'Athos'
+]
+var fe7_eliwoodnames = [
+    'Eliwood', 'Marcus', 'Lowen', 'Rebecca', 'Dorcas', 'Bartre',
+    'Hector', 'Oswin', 'Serra', 'Matthew',
+    'Guy',
+    'Merlinus',
+    'Erk', 'Priscilla',
+    'Lyn', 'Sain', 'Kent', 'Wil', 'Florina',
+    'Raven', 'Lucius',
+    'Canas',
+    'Dart', 'Fiora',
+    'Legault',
+    'Ninian',
+    'Isadora', 'Heath', 'Rath',
+    'Hawkeye',
+    'Geitz', 'Wallace',
+    'Pent', 'Louise',
+    'Karel', 'Harken',
+    'Nino', 'Jaffar',
+    'Vaida',
+    'Nils',
+    'Karla',
+    'Renault',
+    'Athos'
+]
+var fe7_lynnames = [
+    'Lyn',
+    'Kent', 'Sain',
+    'Florina', 'Wil',
+    'Dorcas',
+    'Serra', 'Erk',
+    'Rath', 'Matthew',
+    'Nils', 'Lucius',
+    'Wallace'
 ]
 var fe8_names = [
     'Eirika', 'Seth',
