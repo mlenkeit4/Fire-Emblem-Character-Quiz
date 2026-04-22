@@ -18,10 +18,12 @@
 <body>
     <div class="upper">
         <form '>
-            <label for='charname'><b>Character name:</b></label><br>
+            <label for=' charname'><b>Character name:</b></label><br>
             <input type='text' name='charname'><br>
         </form>
-        <b><p style="font-size:24px" id="gamename"></p></b>
+        <b>
+            <p style="font-size:24px" id="gamename"></p>
+        </b>
         <b><label for="gameselect">Game:</label></b>
         <select name="gameselect" id="gameselect">
             <option value="fe1">Shadow Dragon NES</option>
@@ -52,19 +54,22 @@
         <br>
 
         <br><b><label>Count: </label></b><label id="count"></label><label>/</label><label id="totalCount"></label>
-        <div>Timer: <span id="hours">0</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
-        <br>
-        <input type="checkbox" id="warnings" name="warnings"/>
-        <label for="warnings">Show warnings?</label>
-        <br><button name="reset">Reset</button>
-        <button name="give_up">Give Up</button>
-        <br>
+        <b>
+            <div>Timer:
+        </b><span id="hours">0</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>
+    <br>
+    <input type="checkbox" id="warnings" name="warnings" />
+    <label for="warnings">Show warnings?</label>
+    <br><button name="reset">Reset</button>
+    <button name="give_up">Give Up</button>
+    <br>
     </div>
 
     <div class="right">
         <hr />
         <!--<b><center><label id='fe1Label' style="color:#ffffff"></label></center></b>-->
-        <center><img src="assets/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
+        <center><img src="`/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
         <table border='0' id='fe1Table'></table>
 
         <!--<b><center><label id='fe11Label' style="color:#ffffff"></label></center></b>-->
@@ -134,7 +139,7 @@
         <hr />
     </div>
     <hr>
-    
+
     <script src='./names.js'></script>
 
     <script>
@@ -168,21 +173,40 @@
             "fe17": [fe17_names, "Engage"]
         }
 
+        var directory_map = {
+            "fe1": "fe1",
+            "fe2": "fe2",
+            "fe3": "fe3",
+            "fe4": "fe4",
+            "fe5": "fe5",
+            "fe6": "fe6",
+            "fe7": "fe7",
+            "fe8": "fe8",
+            "fe9": "fe9",
+            "fe10": "fe10",
+            "fe11": "fe11",
+            "fe12": "fe12",
+            "fe13": "fe13",
+            "fe14": "fe14",
+            "fe15": "fe15",
+            "fe16": "fe16",
+            "fe17": "fe17"
+        }
+
         document.getElementById(`count`).textContent = 0
         document.getElementById(`totalCount`).textContent = 0
 
         initialize_game(current_game)
-        
+
         //Game select listener
         document.getElementById('gameselect').addEventListener('change', function () {
             //Reset the tables and labels for every game
-            console.log(document.getElementById("warnings").checked)
-            if (this.value != current_game){
+            if (this.value != current_game) {
                 if (!document.getElementById("warnings").checked || confirm("Changing the game will reset your progress. Proceed?")) {
                     document.getElementById(`count`).textContent = 0
                     document.getElementById(`totalCount`).textContent = 0
 
-                    if (current_game == 'all'){
+                    if (current_game == 'all') {
                         for (const game of list_for_all_games) {
                             document.getElementById(`${game}Logo`).setAttribute("hidden", "hidden")
                             document.getElementById(`${game}Table`).border = 0
@@ -193,7 +217,7 @@
                         document.getElementById(`${current_game}Table`).border = 0
                     }
 
-                    for (const game of games){
+                    for (const game of games) {
                         table = document.getElementById(`${game}Table`)
                         rows = table.rows.length
                         for (var i = 0; i < rows; i++) {
@@ -202,12 +226,12 @@
                         //label = document.getElementById(`${game}Label`)
                         //label.textContent = ''
                     }
-                    if (this.value == 'all'){
-                        for (const game of list_for_all_games){
+                    if (this.value == 'all') {
+                        for (const game of list_for_all_games) {
                             initialize_game(game)
                         }
                     }
-                    else{
+                    else {
                         initialize_game(this.value)
                     }
                     current_game = this.value
@@ -217,7 +241,7 @@
                 else {
                     this.value = current_game
                 }
-                
+
             }
 
         })
@@ -225,7 +249,7 @@
         //Mode select listener
         document.getElementById('modeselect').addEventListener('change', function () {
             //Reset the tables and labels for every game
-            if (this.value != current_mode){
+            if (this.value != current_mode) {
                 if (!document.getElementById("warnings").checked || confirm("Changing the mode will reset your progress. Proceed?")) {
                     current_mode = this.value
                     reset_game()
@@ -234,19 +258,19 @@
                     this.value = current_mode
                 }
             }
-            
+
 
         })
 
         //Listener for processing when the user types in a name
         document.querySelector('input[name=charname]').addEventListener('keyup', function () {
             let matched = false
-            
+
             //Iterate over all the games
             for (const game of games) {
                 name_list = game_map[game][0]
                 //Check if the input is in all of the lists (excluding the All list)
-                if (name_list.includes(listName(this.value))){
+                if (name_list.includes(listName(this.value))) {
                     name = replaceName(listName(this.value).toLowerCase())
                     image = document.getElementById(`img_${replaceName(name)}_${game}`)
                     if (image != null && image.style.visibility == 'hidden') {
@@ -262,7 +286,7 @@
                         }
                         //Stop timer if this is the last name
                         totalCount = document.getElementById(`totalCount`).textContent
-                        if (Number(prevCount) + 1 == Number(totalCount)){
+                        if (Number(prevCount) + 1 == Number(totalCount)) {
                             stop()
                         }
 
@@ -279,7 +303,7 @@
         document.querySelector('button[name=reset]').addEventListener("click", function () {
             if (!document.getElementById("warnings").checked || confirm("Are you sure you want to reset?")) {
                 reset_game()
-            }    
+            }
         });
 
         //Listener for Give Up button
@@ -292,7 +316,7 @@
                         name_list = game_map[game][0]
                         for (const name of name_list) {
                             if (document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility != 'visible') {
-                                document.getElementById(`text_${replaceName(name)}_${game}`).style=giveupColor
+                                document.getElementById(`text_${replaceName(name)}_${game}`).style = giveupColor
                             }
                             document.getElementById(`text_${replaceName(name)}_${game}`).textContent = name
                             document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
@@ -303,13 +327,13 @@
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
                         if (document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility != 'visible') {
-                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style=giveupColor
+                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style = giveupColor
                         }
                         document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = name
                         document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'visible'
                     }
                 }
-            }    
+            }
         });
 
         function initialize_game(game) {
@@ -321,7 +345,7 @@
 
             gameTable.appendChild(nameRow)
             gameTable.appendChild(imgRow)
-            
+
             var name_list = game_map[game][0]
             var title = game_map[game][1]
 
@@ -335,13 +359,14 @@
                 //equivalent to <td id='text_marth'>Marth</td>
                 const nameTd = document.createElement('td')
                 nameTd.textContent = default_text
-                nameTd.style="color:#ffffff"
+                nameTd.style = "color:#ffffff"
                 nameTd.id = `text_${replaceName(name)}_${game}`
                 nameRow.appendChild(nameTd)
 
+                //TODO: implement the various modes by making the image additions dynamic instead of preloaded
                 const imgTd = document.createElement('td')
                 const img = document.createElement('img')
-                img.src = `assets/portraits/${game}/${replaceName(name)}.png`
+                img.src = `assets/portraits/${directory_map[game]}/${replaceName(name)}.png`
                 img.style.visibility = 'hidden'
                 img.id = `img_${replaceName(name)}_${game}`
                 img.width = 1000 / num_cols
@@ -362,32 +387,32 @@
             prevTotal = document.getElementById(`totalCount`).textContent
             document.getElementById(`totalCount`).textContent = Number(prevTotal) + count
         }
-        
+
         function reset_game() {
             if (current_game == "all") {
-                    for (const game of list_for_all_games) {
-                        name_list = game_map[game][0]
-                        for (const name of name_list) {
-                            document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
-                            document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
-                            document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
-                        }
-                        document.getElementById(`${game}Logo`).removeAttribute("hidden")
-
-                    }
-                    document.getElementById(`count`).textContent = 0
-                }
-                else {
-                    name_list = game_map[current_game][0]
+                for (const game of list_for_all_games) {
+                    name_list = game_map[game][0]
                     for (const name of name_list) {
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
-                        document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
+                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
+                        document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
+                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
                     }
-                    document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
-                    document.getElementById(`count`).textContent = 0
+                    document.getElementById(`${game}Logo`).removeAttribute("hidden")
+
                 }
-                reset()
+                document.getElementById(`count`).textContent = 0
+            }
+            else {
+                name_list = game_map[current_game][0]
+                for (const name of name_list) {
+                    document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
+                    document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
+                    document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
+                }
+                document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
+                document.getElementById(`count`).textContent = 0
+            }
+            reset()
         }
 
         function replaceName(name) {
@@ -395,41 +420,41 @@
         }
 
         function listName(name) {
-            if (name.includes(" ")){
+            if (name.includes(" ")) {
                 index = name.indexOf(" ")
-                return name.substring(0,1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
-                        + name.substring(index+1, index+2).toUpperCase() + name.substring(index+2).toLowerCase()
+                return name.substring(0, 1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
+                    + name.substring(index + 1, index + 2).toUpperCase() + name.substring(index + 2).toLowerCase()
             }
             else if (name.includes("'")) {
                 index = name.indexOf("'")
-                return name.substring(0,1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
-                        + name.substring(index+1, index+2).toUpperCase() + name.substring(index+2).toLowerCase()
+                return name.substring(0, 1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
+                    + name.substring(index + 1, index + 2).toUpperCase() + name.substring(index + 2).toLowerCase()
             }
-            return name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase()
+            return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()
         }
 
         var timeElapsed = 0;
         var myTimer;
 
-        function tick(){
+        function tick() {
             timeElapsed++;
             document.getElementById("hours").textContent = Math.floor((timeElapsed / 3600))
             document.getElementById("minutes").textContent = zeroPad(Math.floor((timeElapsed % 3600) / 60))
             document.getElementById("seconds").textContent = zeroPad(timeElapsed % 60);
         }
-        function start(){
+        function start() {
             myTimer = setInterval(tick, 1000);
         }
-        function stop(){
+        function stop() {
             clearInterval(myTimer);
         }
-        function reset(){
+        function reset() {
             stop();
             timeElapsed = -1;
             tick()
         }
         function zeroPad(num) {
-            if (num >=0 && num <= 9) {
+            if (num >= 0 && num <= 9) {
                 return "0" + num
             }
             return "" + num
