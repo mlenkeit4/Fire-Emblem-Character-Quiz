@@ -219,6 +219,7 @@
         }
 
         var table_index_map = {}
+        var typed_names = []
 
         document.getElementById(`count`).textContent = 0
         document.getElementById(`totalCount`).textContent = 0
@@ -231,6 +232,7 @@
             if (this.value != current_game) {
                 if (!document.getElementById("warnings").checked || confirm("Changing the game will reset your progress. Proceed?")) {
                     table_index_map = {}
+                    typed_names = []
                     document.getElementById(`count`).textContent = 0
                     document.getElementById(`totalCount`).textContent = 0
 
@@ -305,7 +307,8 @@
                     for (const index of indeces) {
                         text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
                         image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
-                        if (text != null && text.textContent != listName(name)) {
+                        console.log(listName(name))
+                        if (text != null && !typed_names.includes(listName(name))) {
                             text.textContent = listName(name)
                             image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
                             image.querySelector('img').style.visibility = 'visible'
@@ -331,6 +334,7 @@
             }
             //Clears input if a name was successfully matched
             if (matched) {
+                typed_names.push(listName(replaceName(listName(this.value).toLowerCase())))
                 this.value = ''
             }
         });
@@ -353,11 +357,14 @@
                         for (const name of name_list) {
                             indeces = table_index_map[replaceName(name)]
                             for (const index of indeces) {
-                                if (document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility != 'visible') {
-                                    document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = giveupColor
+                                image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                                text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
+                                if (!typed_names.includes(listName(name))) {
+                                    text.style.color = giveupColor
                                 }
-                                document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = name
-                                document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
+                                image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
+                                text.textContent = name
+                                image.querySelector('img').style.visibility = 'visible'
                             }
 
                         }
@@ -368,15 +375,19 @@
                     for (const name of name_list) {
                         indeces = table_index_map[replaceName(name)]
                         for (const index of indeces) {
-                            if (document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility != 'visible') {
-                                document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = giveupColor
+                            image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                            text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
+                            if (!typed_names.includes(listName(name))) {
+                                text.style.color = giveupColor
                             }
-                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = name
-                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
+                            image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
+                            text.textContent = name
+                            image.querySelector('img').style.visibility = 'visible'
                         }
 
                     }
                 }
+                typed_names = []
             }
         });
 
@@ -478,6 +489,7 @@
                 document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
                 document.getElementById(`count`).textContent = 0
             }
+            typed_names = []
             reset()
         }
 
