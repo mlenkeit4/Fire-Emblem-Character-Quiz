@@ -69,7 +69,7 @@
     <div class="right">
         <hr />
         <!--<b><center><label id='fe1Label' style="color:#ffffff"></label></center></b>-->
-        <center><img src="`/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
+        <center><img src="assets/logos/fe1.png" width="200" hidden id='fe1Logo'></img></center>
         <table border='0' id='fe1Table'></table>
 
         <!--<b><center><label id='fe11Label' style="color:#ffffff"></label></center></b>-->
@@ -210,6 +210,7 @@
             //Reset the tables and labels for every game
             if (this.value != current_game) {
                 if (!document.getElementById("warnings").checked || confirm("Changing the game will reset your progress. Proceed?")) {
+                    table_index_map = {}
                     document.getElementById(`count`).textContent = 0
                     document.getElementById(`totalCount`).textContent = 0
 
@@ -248,6 +249,7 @@
                 else {
                     this.value = current_game
                 }
+                
 
             }
 
@@ -276,31 +278,32 @@
             //Iterate over all the games
             for (const game of games) {
                 name_list = game_map[game][0]
-                //Check if the input is in all of the lists (excluding the All list)
+                //Check if the input is in all of the lists
                 if (name_list.includes(listName(this.value))) {
+                    indeces = table_index_map[replaceName(this.value)]
                     name = replaceName(listName(this.value).toLowerCase())
-                    image = document.getElementById(`img_${replaceName(name)}_${game}`)
-                    if (image != null && image.style.visibility == 'hidden') {
-                        indeces = table_index_map[replaceName(name)][0]
-                        console.log(indeces)
-                        console.log(`text_${indeces[0]}_${indeces[1]}_${game}`)
-                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = listName(name)
-                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
-                        matched = true
-                        prevCount = document.getElementById(`count`).textContent
-                        document.getElementById(`count`).textContent = Number(prevCount) + 1
-                        //Start timer if this is the first name
-                        if (prevCount == 0) {
-                            reset()
-                            start()
-                        }
-                        //Stop timer if this is the last name
-                        totalCount = document.getElementById(`totalCount`).textContent
-                        if (Number(prevCount) + 1 == Number(totalCount)) {
-                            stop()
-                        }
+                    for (const index of indeces) {
+                        image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                        if (image != null && image.querySelector('img').style.visibility == 'hidden') {
+                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = listName(name)
+                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
+                            matched = true
+                            prevCount = document.getElementById(`count`).textContent
+                            document.getElementById(`count`).textContent = Number(prevCount) + 1
+                            //Start timer if this is the first name
+                            if (prevCount == 0) {
+                                reset()
+                                start()
+                            }
+                            //Stop timer if this is the last name
+                            totalCount = document.getElementById(`totalCount`).textContent
+                            if (Number(prevCount) + 1 == Number(totalCount)) {
+                                stop()
+                            }
 
+                        }
                     }
+                    
                 }
             }
             //Clears input if a name was successfully matched
@@ -325,24 +328,31 @@
                     for (const game of list_for_all_games) {
                         name_list = game_map[game][0]
                         for (const name of name_list) {
-                            indeces = table_index_map[replaceName(name)][0]
-                            if (document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility != 'visible') {
-                                document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = giveupColor
+                            indeces = table_index_map[replaceName(name)]
+                            for (const index of indeces) {
+                                if (document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility != 'visible') {
+                                    document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = giveupColor
+                                }
+                                document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = name
+                                document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
                             }
-                            document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = name
-                            document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
+                            
                         }
                     }
                 }
                 else {
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
-                        indeces = table_index_map[replaceName(name)][0]
-                        if (document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility != 'visible') {
-                            document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = giveupColor
+                        indeces = table_index_map[replaceName(name)]
+                        for (const index of indeces) {
+                            console.log(`img_${index[0]}_${index[1]}_${index[2]}`)
+                            if (document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility != 'visible') {
+                                document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = giveupColor
+                            }
+                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = name
+                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
                         }
-                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = name
-                        document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'visible'
+                        
                     }
                 }
             }
@@ -371,18 +381,16 @@
             var count = 0
             for (const name of name_list) {
                 const nameTd = document.createElement('td')
-                console.log(replaceName(name))
                 if (table_index_map[replaceName(name)] != null) {
                     //TODO: map multiple images for repeat names
-                    table_index_map[replaceName(name)] = table_index_map[replaceName(name)].concat([[row, col]])
+                    table_index_map[replaceName(name)] = table_index_map[replaceName(name)].concat([[row, col, game]])
                 }  
                 else {
-                    table_index_map[replaceName(name)] = [[row, col]]
+                    table_index_map[replaceName(name)] = [[row, col, game]]
                 }
                 nameTd.textContent = default_text
                 //nameTd.id = `text_${replaceName(name)}_${game}`
                 nameTd.id = `text_${row}_${col}_${game}`
-                console.log(nameTd.id)
                 nameTd.style.height  = "20px"
                 nameTd.style.color = "#ffffff"
                 nameRow.appendChild(nameTd)
@@ -392,9 +400,11 @@
                 const img = document.createElement('img')
                 img.src = `assets/portraits/${directory_map[game]}/${replaceName(name)}.png`
                 img.style.visibility = 'hidden'
-                img.id = `img_${replaceName(name)}_${game}`
-                imgTd.style.height="80px"
-                imgTd.appendChild(img)*
+                img.style.height="100px"
+                img.style.width="100px"
+                //img.id = `img_${indeces[0]}_${indeces[1]}_${game}`
+                imgTd.id = `img_${row}_${col}_${game}`
+                imgTd.appendChild(img)
                 imgRow.appendChild(imgTd)
 
                 //starting a new row wiith every 10th character
@@ -420,10 +430,13 @@
                 for (const game of list_for_all_games) {
                     name_list = game_map[game][0]
                     for (const name of name_list) {
-                        indeces = table_index_map[replaceName(name)][0]
-                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = default_text
-                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = "#ffffff"
-                        document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
+                        indeces = table_index_map[replaceName(name)]
+                        for (const index of indeces) {
+                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = default_text
+                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = "#ffffff"
+                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'hidden'
+                        }
+                        
                     }
                     document.getElementById(`${game}Logo`).removeAttribute("hidden")
 
@@ -433,10 +446,13 @@
             else {
                 name_list = game_map[current_game][0]
                 for (const name of name_list) {
-                    indeces = table_index_map[replaceName(name)][0]
-                    document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = default_text
-                    document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = "#ffffff"
-                    document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
+                    indeces = table_index_map[replaceName(name)]
+                    for (const index of indeces) {
+                        document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = default_text
+                        document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = "#ffffff"
+                        document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'hidden'
+                    }
+                    
                 }
                 document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
                 document.getElementById(`count`).textContent = 0
@@ -449,7 +465,6 @@
         }
 
         function listName(name) {
-            console.log(name)
             if (name.includes(" ")) {
                 index = name.indexOf(" ")
                 return name.substring(0, 1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
