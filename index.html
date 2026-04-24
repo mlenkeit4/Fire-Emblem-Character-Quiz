@@ -156,11 +156,11 @@
         var game_map = {
             "fe1": [fe1_names, "Shadow Dragon NES"],
             "fe2": [fe2_names, "Gaiden"],
-            "fe3": [fe3_names, "Mystery of the Emblem"],
+            "fe3": [fe3_book2names, "Mystery of the Emblem"],
             "fe4": [[...new Set([...fe4_gen1, ...fe4_gen2])], "Geneaology"],
             "fe5": [fe5_names, "Thracia 776"],
             "fe6": [fe6_names, "Binding Blade"],
-            "fe7": [fe7_hectornames, "Blazing Blade"],
+            "fe7": [fe7_names, "Blazing Blade"],
             "fe8": [fe8_names, "Sacred Stones"],
             "fe9": [fe9_names, "Path of Radiance"],
             "fe10": [fe10_names, "Radiant Dawn"],
@@ -197,6 +197,8 @@
             "fe16": "fe16",
             "fe17": "fe17"
         }
+
+        var table_index_map = {}
 
         document.getElementById(`count`).textContent = 0
         document.getElementById(`totalCount`).textContent = 0
@@ -314,14 +316,14 @@
         //Listener for Give Up button
         document.querySelector('button[name=give_up]').addEventListener("click", function () {
             if (!document.getElementById("warnings").checked || confirm("Are you sure you want to give up?")) {
-                giveupColor = "color:#ff33ff"
+                giveupColor = "#ff33ff"
                 stop()
                 if (current_game == "all") {
                     for (const game of list_for_all_games) {
                         name_list = game_map[game][0]
                         for (const name of name_list) {
                             if (document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility != 'visible') {
-                                document.getElementById(`text_${replaceName(name)}_${game}`).style = giveupColor
+                                document.getElementById(`text_${replaceName(name)}_${game}`).style.color = giveupColor
                             }
                             document.getElementById(`text_${replaceName(name)}_${game}`).textContent = name
                             document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
@@ -332,7 +334,7 @@
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
                         if (document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility != 'visible') {
-                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style = giveupColor
+                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style.color = giveupColor
                         }
                         document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = name
                         document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'visible'
@@ -361,11 +363,11 @@
             //add in an element for each name in fe1_names
             var count = 0
             for (const name of name_list) {
-                //equivalent to <td id='text_marth'>Marth</td>
                 const nameTd = document.createElement('td')
                 nameTd.textContent = default_text
-                nameTd.style = "color:#ffffff"
                 nameTd.id = `text_${replaceName(name)}_${game}`
+                nameTd.style.height  = "20px"
+                nameTd.style.color = "#ffffff"
                 nameRow.appendChild(nameTd)
 
                 //TODO: implement the various modes by making the image additions dynamic instead of preloaded
@@ -374,9 +376,8 @@
                 img.src = `assets/portraits/${directory_map[game]}/${replaceName(name)}.png`
                 img.style.visibility = 'hidden'
                 img.id = `img_${replaceName(name)}_${game}`
-                img.width = 1000 / num_cols
-                img.height = 1000 / num_cols
-                imgTd.appendChild(img)
+                imgTd.style.height="80px"
+                imgTd.appendChild(img)*
                 imgRow.appendChild(imgTd)
 
                 //starting a new row wiith every 10th character
@@ -399,7 +400,7 @@
                     name_list = game_map[game][0]
                     for (const name of name_list) {
                         document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
-                        document.getElementById(`text_${replaceName(name)}_${game}`).style = "color:#ffffff"
+                        document.getElementById(`text_${replaceName(name)}_${game}`).style.color = "#ffffff"
                         document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
                     }
                     document.getElementById(`${game}Logo`).removeAttribute("hidden")
@@ -411,7 +412,7 @@
                 name_list = game_map[current_game][0]
                 for (const name of name_list) {
                     document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
-                    document.getElementById(`text_${replaceName(name)}_${current_game}`).style = "color:#ffffff"
+                    document.getElementById(`text_${replaceName(name)}_${current_game}`).style.color = "#ffffff"
                     document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
                 }
                 document.getElementById(`${current_game}Logo`).removeAttribute("hidden")

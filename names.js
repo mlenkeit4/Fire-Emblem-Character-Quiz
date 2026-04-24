@@ -27,7 +27,24 @@ var fe2_names = [
     'Palla', 'Catria', 'Atlas', 'Jesse', 'Sonya', 'Deen', 'Est',
     'Tatiana', 'Zeke', 'Mycen', 'Nomah'
 ]
-var fe3_names = [
+var fe3_book1names = [
+    'Marth', 'Abel', 'Cain', 'Jagen', 'Gordin', 'Draug', 'Caeda',
+    'Bord', 'Cord', 'Barst', 'Ogma', 'Castor',
+    'Julian', 'Lena', 'Navarre',
+    'Roshea', 'Vyland', 'Sedgar', 'Wolf', 'Hardin', 'Mathhis', 'Merric',
+    'Wendell', 'Rickard',
+    'Bantu',
+    'Caesar', 'Radd',
+    'Maria', 'Minerva',
+    'Jeorge', 'Linde',
+    'Dolph', 'Macellan', 'Tomas', 'Boah', 'Midia',
+    'Astram', 'Catria', 'Palla',
+    'Arran', 'Samson', 'Xane',
+    'Tiki',
+    'Est', 'Lorenz',
+    'Elice'
+]
+var fe3_book2names = [
     'Marth', 'Luke', 'Arran', 'Cecil', 'Roderick', 'Gordin', 'Ryan', 'Draug', 'Marisha',
     'Catria', 'Warren', 'Linde',
     'Palla', 'Julian', 'Matthis',
@@ -132,10 +149,12 @@ var fe6_names = [
     'Yoder',
     'Karel'
 ]
+/*
 var fe6_trialmaps = [
     'Narcian', 'Galle', 'Hector', 'Brunnya', 'Eliwood', 'Murdock', 'Zephiel', 'Guinivere'
 ]
-var fe7_hectornames = [
+*/
+var fe7_names = [
     'Hector', 'Matthew',
     'Oswin', 'Serra', 'Eliwood', 'Marcus', 'Lowen', 'Rebecca', 'Dorcas', 'Bartre',
     'Guy',
@@ -160,40 +179,6 @@ var fe7_hectornames = [
     'Renault',
     'Athos'
 ]
-var fe7_eliwoodnames = [
-    'Eliwood', 'Marcus', 'Lowen', 'Rebecca', 'Dorcas', 'Bartre',
-    'Hector', 'Oswin', 'Serra', 'Matthew',
-    'Guy',
-    'Merlinus',
-    'Erk', 'Priscilla',
-    'Lyn', 'Sain', 'Kent', 'Wil', 'Florina',
-    'Raven', 'Lucius',
-    'Canas',
-    'Dart', 'Fiora',
-    'Legault',
-    'Ninian',
-    'Isadora', 'Heath', 'Rath',
-    'Hawkeye',
-    'Geitz', 'Wallace',
-    'Pent', 'Louise',
-    'Karel', 'Harken',
-    'Nino', 'Jaffar',
-    'Vaida',
-    'Nils',
-    'Karla',
-    'Renault',
-    'Athos'
-]
-var fe7_lynnames = [
-    'Lyn',
-    'Kent', 'Sain',
-    'Florina', 'Wil',
-    'Dorcas',
-    'Serra', 'Erk',
-    'Rath', 'Matthew',
-    'Nils', 'Lucius',
-    'Wallace'
-]
 var fe8_names = [
     'Eirika', 'Seth',
     'Franz', 'Gilliam',
@@ -211,9 +196,11 @@ var fe8_names = [
     'Myrrh',
     'Syrene'
 ]
+/*
 var fe8_creaturecampaign = [
     'Caellach', 'Orson', 'Riev', 'Ismaire', 'Selena', 'Glen', 'Hayden', 'Valter', 'Fado', 'Lyon'
 ]
+*/
 var fe9_names = [
     'Ike',
     'Boyd', 'Titania', 'Oscar',
@@ -240,9 +227,11 @@ var fe9_names = [
     'Nasir', 'Ena',
     'Tibarn', 'Naesala', 'Giffca'
 ]
+/*
 var fe9_trialmaps = [
     'Oliver', 'Shiharam', 'Petrine', 'Bryce', 'Ashnard'
 ]
+*/
 var fe10_names = [
     'Micaiah', 'Edward', 'Leonardo',
     'Nolan',
