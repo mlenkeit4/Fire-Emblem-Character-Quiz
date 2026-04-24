@@ -283,10 +283,15 @@
                     indeces = table_index_map[replaceName(this.value)]
                     name = replaceName(listName(this.value).toLowerCase())
                     for (const index of indeces) {
+                        text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
                         image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
-                        if (image != null && image.querySelector('img').style.visibility == 'hidden') {
-                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = listName(name)
-                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'visible'
+                        console.log(text)
+                        console.log(image)
+                        if (text != null && text.textContent != listName(name)) {
+                            text.textContent = listName(name)
+                            image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
+                            image.querySelector('img').style.visibility = 'visible'
+
                             matched = true
                             prevCount = document.getElementById(`count`).textContent
                             document.getElementById(`count`).textContent = Number(prevCount) + 1
@@ -383,27 +388,25 @@
                 const nameTd = document.createElement('td')
                 if (table_index_map[replaceName(name)] != null) {
                     //TODO: map multiple images for repeat names
-                    table_index_map[replaceName(name)] = table_index_map[replaceName(name)].concat([[row, col, game]])
+                    table_index_map[replaceName(name)] = table_index_map[replaceName(name)].concat([[row, col, directory_map[game]]])
                 }  
                 else {
-                    table_index_map[replaceName(name)] = [[row, col, game]]
+                    table_index_map[replaceName(name)] = [[row, col, directory_map[game]]]
                 }
                 nameTd.textContent = default_text
-                //nameTd.id = `text_${replaceName(name)}_${game}`
-                nameTd.id = `text_${row}_${col}_${game}`
+                nameTd.id = `text_${row}_${col}_${directory_map[game]}`
                 nameTd.style.height  = "20px"
                 nameTd.style.color = "#ffffff"
                 nameRow.appendChild(nameTd)
+                console.log(nameTd)
 
-                //TODO: implement the various modes by making the image additions dynamic instead of preloaded
                 const imgTd = document.createElement('td')
                 const img = document.createElement('img')
-                img.src = `assets/portraits/${directory_map[game]}/${replaceName(name)}.png`
+                //img.src = `assets/portraits/${directory_map[game]}/${replaceName(name)}.png`
                 img.style.visibility = 'hidden'
                 img.style.height="100px"
                 img.style.width="100px"
-                //img.id = `img_${indeces[0]}_${indeces[1]}_${game}`
-                imgTd.id = `img_${row}_${col}_${game}`
+                imgTd.id = `img_${row}_${col}_${directory_map[game]}`
                 imgTd.appendChild(img)
                 imgRow.appendChild(imgTd)
 
@@ -432,9 +435,11 @@
                     for (const name of name_list) {
                         indeces = table_index_map[replaceName(name)]
                         for (const index of indeces) {
-                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = default_text
-                            document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = "#ffffff"
-                            document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'hidden'
+                            image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                            text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
+                            text.textContent = default_text
+                            text.style.color = "#ffffff"
+                            image.querySelector('img').style.visibility = 'hidden'
                         }
                         
                     }
@@ -448,9 +453,11 @@
                 for (const name of name_list) {
                     indeces = table_index_map[replaceName(name)]
                     for (const index of indeces) {
-                        document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).textContent = default_text
-                        document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`).style.color = "#ffffff"
-                        document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`).querySelector('img').style.visibility = 'hidden'
+                            image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                            text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
+                            text.textContent = default_text
+                            text.style.color = "#ffffff"
+                            image.querySelector('img').style.visibility = 'hidden'
                     }
                     
                 }
