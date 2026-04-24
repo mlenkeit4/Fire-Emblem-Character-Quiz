@@ -281,7 +281,10 @@
                     name = replaceName(listName(this.value).toLowerCase())
                     image = document.getElementById(`img_${replaceName(name)}_${game}`)
                     if (image != null && image.style.visibility == 'hidden') {
-                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = listName(name)
+                        indeces = table_index_map[replaceName(name)][0]
+                        console.log(indeces)
+                        console.log(`text_${indeces[0]}_${indeces[1]}_${game}`)
+                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = listName(name)
                         document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
                         matched = true
                         prevCount = document.getElementById(`count`).textContent
@@ -322,10 +325,11 @@
                     for (const game of list_for_all_games) {
                         name_list = game_map[game][0]
                         for (const name of name_list) {
+                            indeces = table_index_map[replaceName(name)][0]
                             if (document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility != 'visible') {
-                                document.getElementById(`text_${replaceName(name)}_${game}`).style.color = giveupColor
+                                document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = giveupColor
                             }
-                            document.getElementById(`text_${replaceName(name)}_${game}`).textContent = name
+                            document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = name
                             document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'visible'
                         }
                     }
@@ -333,10 +337,11 @@
                 else {
                     name_list = game_map[current_game][0]
                     for (const name of name_list) {
+                        indeces = table_index_map[replaceName(name)][0]
                         if (document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility != 'visible') {
-                            document.getElementById(`text_${replaceName(name)}_${current_game}`).style.color = giveupColor
+                            document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = giveupColor
                         }
-                        document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = name
+                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = name
                         document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'visible'
                     }
                 }
@@ -361,11 +366,23 @@
             document.getElementById(`${game}Logo`).removeAttribute("hidden")
 
             //add in an element for each name in fe1_names
+            var row = 0
+            var col = 0
             var count = 0
             for (const name of name_list) {
                 const nameTd = document.createElement('td')
+                console.log(replaceName(name))
+                if (table_index_map[replaceName(name)] != null) {
+                    //TODO: map multiple images for repeat names
+                    table_index_map[replaceName(name)] = table_index_map[replaceName(name)].concat([[row, col]])
+                }  
+                else {
+                    table_index_map[replaceName(name)] = [[row, col]]
+                }
                 nameTd.textContent = default_text
-                nameTd.id = `text_${replaceName(name)}_${game}`
+                //nameTd.id = `text_${replaceName(name)}_${game}`
+                nameTd.id = `text_${row}_${col}_${game}`
+                console.log(nameTd.id)
                 nameTd.style.height  = "20px"
                 nameTd.style.color = "#ffffff"
                 nameRow.appendChild(nameTd)
@@ -388,7 +405,11 @@
 
                     gameTable.appendChild(nameRow)
                     gameTable.appendChild(imgRow)
+                    
+                    row = row + 1
+                    col = -1
                 }
+                col = col + 1
             }
             prevTotal = document.getElementById(`totalCount`).textContent
             document.getElementById(`totalCount`).textContent = Number(prevTotal) + count
@@ -399,8 +420,9 @@
                 for (const game of list_for_all_games) {
                     name_list = game_map[game][0]
                     for (const name of name_list) {
-                        document.getElementById(`text_${replaceName(name)}_${game}`).textContent = default_text
-                        document.getElementById(`text_${replaceName(name)}_${game}`).style.color = "#ffffff"
+                        indeces = table_index_map[replaceName(name)][0]
+                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = default_text
+                        document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = "#ffffff"
                         document.getElementById(`img_${replaceName(name)}_${game}`).style.visibility = 'hidden'
                     }
                     document.getElementById(`${game}Logo`).removeAttribute("hidden")
@@ -411,8 +433,9 @@
             else {
                 name_list = game_map[current_game][0]
                 for (const name of name_list) {
-                    document.getElementById(`text_${replaceName(name)}_${current_game}`).textContent = default_text
-                    document.getElementById(`text_${replaceName(name)}_${current_game}`).style.color = "#ffffff"
+                    indeces = table_index_map[replaceName(name)][0]
+                    document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).textContent = default_text
+                    document.getElementById(`text_${indeces[0]}_${indeces[1]}_${game}`).style.color = "#ffffff"
                     document.getElementById(`img_${replaceName(name)}_${current_game}`).style.visibility = 'hidden'
                 }
                 document.getElementById(`${current_game}Logo`).removeAttribute("hidden")
@@ -426,15 +449,19 @@
         }
 
         function listName(name) {
+            console.log(name)
             if (name.includes(" ")) {
                 index = name.indexOf(" ")
                 return name.substring(0, 1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
                     + name.substring(index + 1, index + 2).toUpperCase() + name.substring(index + 2).toLowerCase()
             }
             else if (name.includes("'")) {
-                index = name.indexOf("'")
-                return name.substring(0, 1).toUpperCase() + name.substring(1, index + 1).toLowerCase()
-                    + name.substring(index + 1, index + 2).toUpperCase() + name.substring(index + 2).toLowerCase()
+                if (name == "say'ri") {
+                    return "Say'ri"
+                }
+                else if (name == "l'arachel") {
+                    return "L'Arachel"
+                }
             }
             return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()
         }
