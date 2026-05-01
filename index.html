@@ -199,6 +199,7 @@
         }
 
         var table_index_map = {}
+        var next_square_map = {}
         var typed_names = []
 
         document.getElementById(`count`).textContent = 0
@@ -211,6 +212,7 @@
             //Reset the tables and labels for every game
             if (this.value != current_game) {
                 if (!document.getElementById("warnings").checked || confirm("Changing the game will reset your progress. Proceed?")) {
+                    next_square_map = {}
                     table_index_map = {}
                     typed_names = []
                     document.getElementById(`count`).textContent = 0
@@ -270,8 +272,6 @@
                     this.value = current_mode
                 }
             }
-
-
         })
 
         //Listener for processing when the user types in a name
@@ -280,21 +280,41 @@
 
             //Iterate over all the games
             for (const game of games) {
-                if (current_game == game || current_game == 'all') {
+                //Only proceed if you're checking the current game or if you're checking all games
+                if (current_game == game || (current_game == 'all' && list_for_all_games.includes(game))) {
                     name_list = game_map[game][0]
-                    //Check if the input is in all of the lists
+                    //Check if the input is in the current list
                     if (name_list.includes(listName(this.value))) {
+                        //Retrieve the index list with the regular position for each of the games
+                        //index[0] = row, index[1] = col, index[2] = game
                         indeces = table_index_map[replaceName(this.value)]
                         name = replaceName(listName(this.value).toLowerCase())
-                        for (const index of indeces) {
+                        for (const temp_index of indeces) {
+                            index = temp_index
+                            //If mode is chaos then overwrite the indeces with the next available square
+                            if (current_mode == "chaos") {
+                                new_indeces = nextSquareToIndeces(next_square_map[game])
+                                index = [new_indeces[0], new_indeces[1], index[2]]
+                            }
+                            //If mode is inorder then skip the rest of the loop if the index doesn't match the next square
+                            else if (current_mode == "inorder") {
+                                new_indeces = nextSquareToIndeces(next_square_map[game])
+                                if (index[0] != new_indeces[0] || index[1] != new_indeces[1]) {
+                                    continue
+                                }
+                            }
+                            //Retrieve the text and image from the square of the appropriate indeces
                             text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
                             image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
-                            if (text != null && !typed_names.includes(listName(name)) && game == index[2]) {
+                            //Proceed if the text exists, the name hasn't already been typed, and the game matches the game index
+                            if (text != null && text.textContent != listName(name) && game == index[2]) {
+
                                 text.textContent = listName(name)
                                 image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
                                 image.querySelector('img').style.visibility = 'visible'
 
                                 matched = true
+                                next_square_map[game] = next_square_map[game] + 1
                                 prevCount = document.getElementById(`count`).textContent
                                 document.getElementById(`count`).textContent = Number(prevCount) + 1
                                 //Start timer if this is the first name
@@ -304,15 +324,13 @@
                                 }
                                 //Stop timer if this is the last name
                                 totalCount = document.getElementById(`totalCount`).textContent
-                                if (Number(prevCount) + 1 == Number(totalCount)) {
+                                if (Number(prevCount) + 1 >= Number(totalCount)) {
                                     stop()
                                 }
 
                             }
                         }
                     }
-                
-
                 }
             }
             //Clears input if a name was successfully matched
@@ -391,6 +409,7 @@
             //document.getElementById(`${game}Label`).textContent = title
             document.getElementById(`${game}Logo`).removeAttribute("hidden")
 
+            next_square_map[game] = 0
             //add in an element for each name in fe1_names
             var row = 0
             var col = 0
@@ -440,6 +459,7 @@
             if (current_game == "all") {
                 for (const game of list_for_all_games) {
                     name_list = game_map[game][0]
+                    next_square_map[game] = 0
                     for (const name of name_list) {
                         indeces = table_index_map[replaceName(name)]
                         for (const index of indeces) {
@@ -452,12 +472,12 @@
 
                     }
                     document.getElementById(`${game}Logo`).removeAttribute("hidden")
-
                 }
                 document.getElementById(`count`).textContent = 0
             }
             else {
                 name_list = game_map[current_game][0]
+                next_square_map[current_game] = 0
                 for (const name of name_list) {
                     indeces = table_index_map[replaceName(name)]
                     for (const index of indeces) {
@@ -499,6 +519,12 @@
 
         var timeElapsed = 0;
         var myTimer;
+
+        function nextSquareToIndeces(nextSquare) {
+            row = Math.floor(nextSquare / num_cols)
+            col = nextSquare % num_cols
+            return [row, col]
+        }
 
         function tick() {
             timeElapsed++;
