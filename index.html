@@ -1,3 +1,11 @@
+<!--
+TODOS:
+- various translations of the names of the non-localized games
+- mode for classes (i.e. name all the archers, myrmidons, etc.)
+- make it look good
+- do the selections between including substitute units or not
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -307,7 +315,9 @@
                             text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
                             image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
                             //Proceed if the text exists, the name hasn't already been typed, and the game matches the game index
-                            if (text != null && text.textContent != listName(name) && game == index[2]) {
+                            if (text != null && game == index[2] && 
+                                    ((current_mode != 'chaos' && text.textContent != listName(name)) ||
+                                    (current_mode == 'chaos' && !typed_names.includes(listName(name))))) {
 
                                 text.textContent = listName(name)
                                 image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
