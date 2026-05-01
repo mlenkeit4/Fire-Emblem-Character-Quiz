@@ -170,7 +170,7 @@
             "fe14": [fe14_names, "Fates"],
             "fe15": [fe15_names, "Shadows of Valentia"],
             "fe16": [fe16_names, "Three Houses"],
-            "fe17": [fe17_names, "Engage"]
+            "fe17": [fe17_names, "Engage"],
         }
 
         var directory_map = {
@@ -196,26 +196,6 @@
             "fe15": "fe15",
             "fe16": "fe16",
             "fe17": "fe17"
-        }
-
-        var index_map = {
-            "fe1": [0, 0],
-            "fe2": [0, 0],
-            "fe3": [0, 0],
-            "fe4": [0, 0],
-            "fe5": [0, 0],
-            "fe6": [0, 0],
-            "fe7": [0, 0],
-            "fe8": [0, 0],
-            "fe9": [0, 0],
-            "fe10": [0, 0],
-            "fe11": [0, 0],
-            "fe12": [0, 0],
-            "fe13": [0, 0],
-            "fe14": [0, 0],
-            "fe15": [0, 0],
-            "fe16": [0, 0],
-            "fe17": [0, 0],
         }
 
         var table_index_map = {}
@@ -260,6 +240,7 @@
                         for (const game of list_for_all_games) {
                             initialize_game(game)
                         }
+                        document.getElementById(`gamename`).textContent = 'All'
                     }
                     else {
                         initialize_game(this.value)
@@ -299,36 +280,38 @@
 
             //Iterate over all the games
             for (const game of games) {
-                name_list = game_map[game][0]
-                //Check if the input is in all of the lists
-                if (name_list.includes(listName(this.value))) {
-                    indeces = table_index_map[replaceName(this.value)]
-                    name = replaceName(listName(this.value).toLowerCase())
-                    for (const index of indeces) {
-                        text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
-                        image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
-                        console.log(listName(name))
-                        if (text != null && !typed_names.includes(listName(name))) {
-                            text.textContent = listName(name)
-                            image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
-                            image.querySelector('img').style.visibility = 'visible'
+                if (current_game == game || current_game == 'all') {
+                    name_list = game_map[game][0]
+                    //Check if the input is in all of the lists
+                    if (name_list.includes(listName(this.value))) {
+                        indeces = table_index_map[replaceName(this.value)]
+                        name = replaceName(listName(this.value).toLowerCase())
+                        for (const index of indeces) {
+                            text = document.getElementById(`text_${index[0]}_${index[1]}_${index[2]}`)
+                            image = document.getElementById(`img_${index[0]}_${index[1]}_${index[2]}`)
+                            if (text != null && !typed_names.includes(listName(name)) && game == index[2]) {
+                                text.textContent = listName(name)
+                                image.querySelector('img').src = `assets/portraits/${index[2]}/${replaceName(name)}.png`
+                                image.querySelector('img').style.visibility = 'visible'
 
-                            matched = true
-                            prevCount = document.getElementById(`count`).textContent
-                            document.getElementById(`count`).textContent = Number(prevCount) + 1
-                            //Start timer if this is the first name
-                            if (prevCount == 0) {
-                                reset()
-                                start()
-                            }
-                            //Stop timer if this is the last name
-                            totalCount = document.getElementById(`totalCount`).textContent
-                            if (Number(prevCount) + 1 == Number(totalCount)) {
-                                stop()
-                            }
+                                matched = true
+                                prevCount = document.getElementById(`count`).textContent
+                                document.getElementById(`count`).textContent = Number(prevCount) + 1
+                                //Start timer if this is the first name
+                                if (prevCount == 0) {
+                                    reset()
+                                    start()
+                                }
+                                //Stop timer if this is the last name
+                                totalCount = document.getElementById(`totalCount`).textContent
+                                if (Number(prevCount) + 1 == Number(totalCount)) {
+                                    stop()
+                                }
 
+                            }
                         }
                     }
+                
 
                 }
             }
